@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus</title>
+  <link rel="stylesheet" href="css/styles-main-page.css">
+  <link rel="icon" href="icon_web.png" type="image/png">
+  
+</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+<body>
+
+  <header class="header">
+    <div class="header">
+      <div class="logo_top"><a href="">
+        <img src="new website/LOGO AKB6/logo_gif_onlyicon_abk6.gif" alt="" >
+    </a></div>
+      <div class="logo">
+      <a href="">
+        <img src="new website/LOGO AKB6/LOGO-ABK6_ONLYLETTERS.svg" alt="" >
+    </a>
+      </div>
+  
+    <div class="menu">
+      <div class="left" >
+        
+        <a href="website-about.html">
+        <img src="new website/logos_menu_sections/menu_sans-01.svg" alt="Default SVG" class="default">
+        <img src="new website/logos_menu_sections/menu_pixel-01.svg" alt="Hover SVG" class="hover">
+        </a>
+      </div>
+      <div class="center" >
+        
+        <a href="index.html" onclick="filterVideos('All')">
+          <img src="new website/logos_menu_sections/menu_sans-02.svg" alt="Default SVG" class="default">
+          <img src="new website/logos_menu_sections/menu_pixel-02.svg" alt="Hover SVG" class="hover">
+        </a>
+      </div>
+      <div class="right">
+        
+        <a href="index.html"  onclick="scrollToTop(); filterVideos('Reel');" >
+        <img src="new website/logos_menu_sections/menu_sans-03.svg" alt="Default SVG" class="default">
+        <img src="new website/logos_menu_sections/menu_pixel-03.svg" alt="Hover SVG" class="hover">
+        </a>
+      </div>
+      <div class="icon-toggle">
+        <div class="btn btn-pill" id="button-1">
+          <input type="checkbox" class="checkbox" />
+          <div class="knob"></div>
+          <div class="btn-bg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </header> 
+  
+  <div class="main-video-container-case" data-category="Reel">
+    <div class="main-video-casestudy">
+        <iframe
+            src="https://player.vimeo.com/video/1037287596?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&loop=1&muted=1&controls=0&dnt=1"
+            frameborder="0"
+            allow="autoplay; fullscreen;"
+            allowfullscreen>
+        </iframe>
+
+        <!-- Contenedor de progreso -->
+        <div class="progress-container" >
+            <div class="progress-bar"></div>
+        </div>
+
+        <!-- Botón de Play/Pause -->
+        <div class="custom-button play-pause-button">
+            <!-- Icono de Play -->
+            <svg class="play-icon" width="40" height="38" viewBox="0 0 47 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+          
+              <path d="M44.3858 20.8616L3.10742 2.39734V40.6411L44.3858 20.8616Z" fill="#F5F4E5"/>
+              <rect x="24.8379" y="27.7544" width="5.31179" height="3.60267" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 24.8379 14.3138)" fill="black"/>
+              <rect x="19.5264" y="30.2487" width="5.31179" height="3.60267" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 19.5264 11.8196)" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 14.2148 9.46399)" fill="black"/>
+              <rect x="14.2148" y="32.6042" width="5.31179" height="3.60267" fill="black"/>
+              <rect x="8.90234" y="35.0983" width="5.31179" height="3.60267" fill="black"/>
+              <rect x="1.79004" y="37.5233" width="7.31704" height="3.60267" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 8.90234 6.96973)" fill="black"/>
+              <rect width="8.37629" height="3.60267" transform="matrix(1 0 0 -1 0.526367 5.16858)" fill="black"/>
+              <rect width="4.08596" height="42.5392" transform="matrix(1 0 0 -1 0.526367 42.7886)" fill="black"/>
+              <rect x="35.4619" y="22.0039" width="5.31179" height="3.60267" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 35.4619 20.0641)" fill="black"/>
+              <rect x="30.1494" y="24.7754" width="5.31179" height="3.60267" fill="black"/>
+              <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 30.1494 17.2928)" fill="black"/>
+              <rect x="40.7734" y="19.2327" width="5.31179" height="3.60267" fill="black"/>
+              
+              
+      </svg>
+            <!-- Icono de Pause -->
+            <svg class="pause-icon" style="display: none;" width="34" height="38" viewBox="0 0 38 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 1.5H1.5V3V29V30.5H3H9.5625H11.0625V29V3V1.5H9.5625H3ZM31.4375 1.5H29.9375V3V29V30.5H31.4375H38H39.5V29V3V1.5H38H31.4375Z" fill="#F5F4E5" stroke="black" stroke-width="3"/>
+          </svg>
+        </div>
+
+        <!-- Botón de Sonido -->
+        <div class="sound-button" id="soundButton">
+            <!-- Icono de Sonido Activo -->
+            <svg class="sound-on-icon" width="55" height="30" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5 22.5171V28.0927L31.0001 49V3L5 22.5171Z" fill="#F5F4E5"/>
+              <rect x="16" y="35" width="4" height="8" fill="black"/>
+              <rect x="8" y="27" width="4" height="8" fill="black"/>
+              <rect x="16" y="8" width="4" height="8" fill="black"/>
+              <rect x="8" y="16" width="4" height="8" fill="black"/>
+              <rect x="20" y="4" width="4" height="8" fill="black"/>
+              <rect x="12" y="12" width="4" height="8" fill="black"/>
+              <rect x="20" y="39" width="4" height="8" fill="black"/>
+              <rect x="12" y="31" width="4" height="8" fill="black"/>
+              <rect y="20" width="12" height="12" fill="black"/>
+              <rect x="24" y="43" width="7" height="8" fill="black"/>
+              <rect x="24" width="7" height="8" fill="black"/>
+              <rect x="27" y="5" width="4" height="45" fill="black"/>
+              <rect x="31" y="20" width="5" height="12" fill="black"/>
+              <rect x="63" y="20" width="4" height="12" fill="black"/>
+              <rect x="51" y="16" width="4" height="19" fill="black"/>
+              <rect x="43" y="20" width="4" height="12" fill="black"/>
+              <rect x="59" y="32" width="4" height="8" fill="black"/>
+              <rect x="59" y="12" width="4" height="8" fill="black"/>
+              <rect x="55" y="8" width="4" height="4" fill="black"/>
+              <rect x="55" y="40" width="4" height="4" fill="black"/>
+              <rect x="51" y="44" width="4" height="4" fill="black"/>
+              <rect x="47" y="48" width="4" height="4" fill="black"/>
+              <rect x="51" y="4" width="4" height="4" fill="black"/>
+              <rect x="47" width="4" height="4" fill="black"/>
+              <rect x="47" y="12" width="4" height="4" fill="black"/>
+              <rect x="43" y="8" width="4" height="4" fill="black"/>
+              <rect x="39" y="16" width="4" height="4" fill="black"/>
+              <rect x="39" y="32" width="4" height="4" fill="black"/>
+              <rect x="47" y="35" width="4" height="4" fill="black"/>
+              <rect x="43" y="39" width="4" height="4" fill="black"/>
+          </svg>
+            <!-- Icono de Sonido Inactivo -->
+            <svg class="sound-off-icon" style="display: none;" width="55" height="30" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5 22.5171V28.0927L31.0001 49V3L5 22.5171Z" fill="#F5F4E5"/>
+              <rect x="16" y="35" width="4" height="8" fill="black"/>
+              <rect x="8" y="27" width="4" height="8" fill="black"/>
+              <rect x="16" y="8" width="4" height="8" fill="black"/>
+              <rect x="8" y="16" width="4" height="8" fill="black"/>
+              <rect x="20" y="4" width="4" height="8" fill="black"/>
+              <rect x="12" y="12" width="4" height="8" fill="black"/>
+              <rect x="20" y="39" width="4" height="8" fill="black"/>
+              <rect x="12" y="31" width="4" height="8" fill="black"/>
+              <rect y="20" width="12" height="12" fill="black"/>
+              <rect x="24" y="43" width="7" height="8" fill="black"/>
+              <rect x="24" width="7" height="8" fill="black"/>
+              <rect x="27" y="5" width="4" height="45" fill="black"/>
+              <rect x="31" y="20" width="5" height="12" fill="black"/>
+          </svg>
+        </div>
+
+        <!-- Botón de Pantalla Completa -->
+        <div class="fullscreen-button">
+            <svg width="auto" height="38" viewBox="0 0 54 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.67578 2.25977H2.17578L2.17578 3.75977V8.84589V10.3459L2.17579 17.7466L2.17579 19.2466H3.67579H8.76191H10.2619V17.7466L10.2619 10.3459H17.6626H19.1626V8.84589V3.75977V2.25977H17.6626H10.2619H8.76191H3.67578ZM52.3283 3.75977V2.25977L50.8283 2.25977L45.7422 2.25977L44.2422 2.25977L36.8415 2.25977L35.3415 2.25977V3.75977V8.84589V10.3459H36.8415L44.2422 10.3459V17.7466V19.2466H45.7422H50.8283H52.3283V17.7466V10.3459V8.8459V3.75977ZM50.8283 41.2866H52.3283V39.7866V34.7005V33.2005L52.3283 25.7997V24.2997H50.8283H45.7422H44.2422V25.7997V33.2005L36.8415 33.2005H35.3415V34.7005V39.7866V41.2866H36.8415H44.2422H45.7422H50.8283ZM2.17578 39.7866V41.2866H3.67578H8.7619H10.2619L17.6626 41.2866H19.1626V39.7866L19.1626 34.7005V33.2005H17.6626L10.2619 33.2005L10.2619 25.7997V24.2997H8.76191H3.67578H2.17578L2.17578 25.7997L2.17578 33.2005V34.7005V39.7866Z" fill="#F5F4E5" stroke="black" stroke-width="3"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<div class="grid-container">
+<div class="grid-item">
+  <div class="video-container">
+    <iframe
+src="https://player.vimeo.com/video/1037287575?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&autoplay=1&loop=1&muted=1&controls=0&dnt=1"
+frameborder="0"
+allow="autoplay; fullscreen;"
+allowfullscreen>
+</iframe>
+  <div class="progress-container">
+    <div class="progress-bar"></div>
+</div>
+<div class="custom-button play-pause-button">
+    <!-- Play Icon -->
+    <svg class="play-icon" width="40" height="38" viewBox="0 0 47 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+      
+            <path d="M44.3858 20.8616L3.10742 2.39734V40.6411L44.3858 20.8616Z" fill="#F5F4E5"/>
+            <rect x="24.8379" y="27.7544" width="5.31179" height="3.60267" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 24.8379 14.3138)" fill="black"/>
+            <rect x="19.5264" y="30.2487" width="5.31179" height="3.60267" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 19.5264 11.8196)" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 14.2148 9.46399)" fill="black"/>
+            <rect x="14.2148" y="32.6042" width="5.31179" height="3.60267" fill="black"/>
+            <rect x="8.90234" y="35.0983" width="5.31179" height="3.60267" fill="black"/>
+            <rect x="1.79004" y="37.5233" width="7.31704" height="3.60267" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 8.90234 6.96973)" fill="black"/>
+            <rect width="8.37629" height="3.60267" transform="matrix(1 0 0 -1 0.526367 5.16858)" fill="black"/>
+            <rect width="4.08596" height="42.5392" transform="matrix(1 0 0 -1 0.526367 42.7886)" fill="black"/>
+            <rect x="35.4619" y="22.0039" width="5.31179" height="3.60267" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 35.4619 20.0641)" fill="black"/>
+            <rect x="30.1494" y="24.7754" width="5.31179" height="3.60267" fill="black"/>
+            <rect width="5.31179" height="3.60267" transform="matrix(1 0 0 -1 30.1494 17.2928)" fill="black"/>
+            <rect x="40.7734" y="19.2327" width="5.31179" height="3.60267" fill="black"/>              
+    </svg>
+    <!-- Pause Icon -->
+    <svg class="pause-icon" style="display: none;" width="34" height="38" viewBox="0 0 38 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 1.5H1.5V3V29V30.5H3H9.5625H11.0625V29V3V1.5H9.5625H3ZM31.4375 1.5H29.9375V3V29V30.5H31.4375H38H39.5V29V3V1.5H38H31.4375Z" fill="#F5F4E5" stroke="black" stroke-width="3"/>
+    </svg>
+</div>
+<div class="sound-button" id="soundButton">
+    <!-- Sound On Icon -->
+    <svg class="sound-on-icon" width="55" height="30" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 22.5171V28.0927L31.0001 49V3L5 22.5171Z" fill="#F5F4E5"/>
+        <rect x="16" y="35" width="4" height="8" fill="black"/>
+        <rect x="8" y="27" width="4" height="8" fill="black"/>
+        <rect x="16" y="8" width="4" height="8" fill="black"/>
+        <rect x="8" y="16" width="4" height="8" fill="black"/>
+        <rect x="20" y="4" width="4" height="8" fill="black"/>
+        <rect x="12" y="12" width="4" height="8" fill="black"/>
+        <rect x="20" y="39" width="4" height="8" fill="black"/>
+        <rect x="12" y="31" width="4" height="8" fill="black"/>
+        <rect y="20" width="12" height="12" fill="black"/>
+        <rect x="24" y="43" width="7" height="8" fill="black"/>
+        <rect x="24" width="7" height="8" fill="black"/>
+        <rect x="27" y="5" width="4" height="45" fill="black"/>
+        <rect x="31" y="20" width="5" height="12" fill="black"/>
+        <rect x="63" y="20" width="4" height="12" fill="black"/>
+        <rect x="51" y="16" width="4" height="19" fill="black"/>
+        <rect x="43" y="20" width="4" height="12" fill="black"/>
+        <rect x="59" y="32" width="4" height="8" fill="black"/>
+        <rect x="59" y="12" width="4" height="8" fill="black"/>
+        <rect x="55" y="8" width="4" height="4" fill="black"/>
+        <rect x="55" y="40" width="4" height="4" fill="black"/>
+        <rect x="51" y="44" width="4" height="4" fill="black"/>
+        <rect x="47" y="48" width="4" height="4" fill="black"/>
+        <rect x="51" y="4" width="4" height="4" fill="black"/>
+        <rect x="47" width="4" height="4" fill="black"/>
+        <rect x="47" y="12" width="4" height="4" fill="black"/>
+        <rect x="43" y="8" width="4" height="4" fill="black"/>
+        <rect x="39" y="16" width="4" height="4" fill="black"/>
+        <rect x="39" y="32" width="4" height="4" fill="black"/>
+        <rect x="47" y="35" width="4" height="4" fill="black"/>
+        <rect x="43" y="39" width="4" height="4" fill="black"/>
+    </svg>
+    <!-- Sound Off Icon -->
+    <svg class="sound-off-icon" style="display: none;" width="55" height="30" viewBox="0 0 40 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M5 22.5171V28.0927L31.0001 49V3L5 22.5171Z" fill="#F5F4E5"/>
+        <rect x="16" y="35" width="4" height="8" fill="black"/>
+        <rect x="8" y="27" width="4" height="8" fill="black"/>
+        <rect x="16" y="8" width="4" height="8" fill="black"/>
+        <rect x="8" y="16" width="4" height="8" fill="black"/>
+        <rect x="20" y="4" width="4" height="8" fill="black"/>
+        <rect x="12" y="12" width="4" height="8" fill="black"/>
+        <rect x="20" y="39" width="4" height="8" fill="black"/>
+        <rect x="12" y="31" width="4" height="8" fill="black"/>
+        <rect y="20" width="12" height="12" fill="black"/>
+        <rect x="24" y="43" width="7" height="8" fill="black"/>
+        <rect x="24" width="7" height="8" fill="black"/>
+        <rect x="27" y="5" width="4" height="45" fill="black"/>
+        <rect x="31" y="20" width="5" height="12" fill="black"/>
+    </svg>
+</div>
+<div class="fullscreen-button" id="fullscreenButton">
+    <svg width="auto" height="38" viewBox="0 0 54 43" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3.67578 2.25977H2.17578L2.17578 3.75977V8.84589V10.3459L2.17579 17.7466L2.17579 19.2466H3.67579H8.76191H10.2619V17.7466L10.2619 10.3459H17.6626H19.1626V8.84589V3.75977V2.25977H17.6626H10.2619H8.76191H3.67578ZM52.3283 3.75977V2.25977L50.8283 2.25977L45.7422 2.25977L44.2422 2.25977L36.8415 2.25977L35.3415 2.25977V3.75977V8.84589V10.3459H36.8415L44.2422 10.3459V17.7466V19.2466H45.7422H50.8283H52.3283V17.7466V10.3459V8.8459V3.75977ZM50.8283 41.2866H52.3283V39.7866V34.7005V33.2005L52.3283 25.7997V24.2997H50.8283H45.7422H44.2422V25.7997V33.2005L36.8415 33.2005H35.3415V34.7005V39.7866V41.2866H36.8415H44.2422H45.7422H50.8283ZM2.17578 39.7866V41.2866H3.67578H8.7619H10.2619L17.6626 41.2866H19.1626V39.7866L19.1626 34.7005V33.2005H17.6626L10.2619 33.2005L10.2619 25.7997V24.2997H8.76191H3.67578H2.17578L2.17578 25.7997L2.17578 33.2005V34.7005V39.7866Z" fill="#F5F4E5" stroke="black" stroke-width="3"/>
+        </svg>
+</div>
+  </div>
+  
+</div>
+    <!-- Repeat the grid-item structure for all your items, changing content as needed -->
+    
+    <div class="grid-item">
+      <div class="video-container">
+        <img class="custom-image" src="new website\DON'T LOSE YOUR BUS\2.png">
+    </div>
+    </div>
+    <div class="grid-item">
+      <div class="video-container">
+        <img class="custom-image" src="new website\DON'T LOSE YOUR BUS\3.png">
+    </div>
+    </div>
+    <div class="grid-item">
+      <div class="video-container">
+        <img class="custom-image" src="new website\DON'T LOSE YOUR BUS\1.png">
+    </div>
+    </div>
+    </div>
+    <div class="main-container">
+            <div class="info-container">
+          <h1>info</h1>
+          <p>This fake advertisement for a bus tracking app is a personal project.
+<br><br>
+Created using a mix of techniques, 2D and 3D, the style is simple, and the palette is synthetic. 
+<br><br>
+The result is an erratic rhythm, transitions, and simplicity.</p>
+      </div>
+      
+      <!-- Créditos -->
+      <div class="credits-container">
+          <h1>credits</h1>
+          <div class="credits-columns">
+              <div class="column">
+                  
+                  
+                  <p><e>Creative Director</e><br>Robert Abecasis aka:ABK6</p>
+                  <p><e>2D & 3D Animation</e><br>Robert Abecasis</p>
+                  <p><e>Sound</e><br>Ariana Abecasis</p>
+                  
+                 
+              </div>
+              <div class="column">
+                <p><e>Studio</e><br>abk6</p>
+                <p><e>Compositing</e><br>Robert Abecasis</p>
+                
+                
+              </div>
+          </div>
+      </div>
+  </div>
+     
+    <!-- Add more grid-items as needed -->
+  </div>
+  <div class="floating-nav previous">
+    <a href="casestudy-entorns.html"><img src="new website/logos_menu_sections/previous-next_helvetica-07.svg" alt="Default SVG" class="default">
+      <img src="new website/logos_menu_sections/previous-next_pixel-07.svg" alt="Hover SVG" class="hover"></a>
+  </div>
+  <div class="floating-nav next">
+    <a href="casestudy-barbie.html"><img src="new website/logos_menu_sections/previous-next_helvetica-08.svg" alt="Default SVG" class="default">
+      <img src="new website/logos_menu_sections/previous-next_pixel-08.svg" alt="Hover SVG" class="hover"></a>
+  </div>
+  <footer class="footer">
+    <div class="top-footer">
+      <div class="links">
+          <a href="https://www.instagram.com/abk6.studio/">instagram</a>
+          <a href="https://vimeo.com/robertabecasis">vimeo</a>
+          <a href="https://wa.me/34625329937">whatsapp</a>
+          <a href="https://www.linkedin.com/company/abk6studio/">linkedin</a>
+      </div>
+      <div class="email">
+          <a href="mailto:robert@abk6.studio">robert@abk6.studio</a>
+      </div>
+      <img src="new website/LOGO AKB6\logo_icon_full.gif" alt="Logo" class="footer-icon">
+    </div>
+    <div class="bottom-footer">
+      <div class="svg-chain" id="svg-chain">
+        <div class="scroll-container" id="scroll-container">
+            <!-- SVG Repetido -->
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                viewBox="0 0 472.2 123.2" style="enable-background:new 0 0 472.2 123.2;" xml:space="preserve">
+                <style type="text/css">
+                    .st0 { fill: #000000; }
+                </style>
+                <path class="st0" d="M56.3,74.3h41.1L77.2,34.6h-0.5L56.3,74.3z M91.6,22.6l45.9,87.5v0.6h-21.6l-9.9-19.6H47.6l-10.1,19.6H16.2
+                v-0.6l45.5-87.5H91.6L91.6,22.6z"/>
+                <path class="st0" d="M227,94.8c4.4,0,8-3.6,8-8v-4.2c0-4.4-3.6-8-8-8h-61.2v20.2H227z M232.5,46.8c0-4.4-3.6-8-8-8h-58.7v19.5h58.7
+                c4.4,0,8-3.6,8-8V46.8z M256.3,86.6c0,17.2-10.2,24.5-34.5,24.5h-76V22.6h72.7c24.9,0,35.3,7,35.3,24.1c0,9.5-3.3,15.7-11.3,19.4
+                C252.3,69.3,256.3,75.9,256.3,86.6L256.3,86.6z"/>
+                <polygon class="st0" points="316.4,60.9 368.1,110.3 368.1,110.9 340.3,110.9 301.1,72.6 284.4,85.1 284.4,110.9 264.5,110.9 
+                264.5,22.5 284.4,22.5 284.4,63.3 337.8,22.5 366,22.5 366,23.2 316.4,60.9 "/>
+                <path class="st0" d="M433.4,97.7v-4.4h6.5V75.6h-6.5v-4.4h-32.7v4.4h-6.5v17.7h6.5v4.4H433.4z M394.2,111v-4.4h-13.1v-8.9h-6.5V84.4
+                h-6.5V49.1h6.5V35.8h6.5v-8.9h13.1v-4.4H440v4.4H453v8.9h6.5v8.9H440v-4.4h-6.5v-4.4h-32.7v4.4h-6.5v13.3h-6.5v13.3h6.5v-4.4h6.5
+                v-4.4h45.7v4.4h6.5v4.4h6.5v31H453v8.9H440v4.4L394.2,111L394.2,111z"/>
+            </svg>
+            <!-- Repite los SVGs según sea necesario -->
+        </div>
+    </div>
+        
+    </div>
+</footer>
+  
+<script src="js\simulation-particles.js" defer></script> 
+ <script src="https://player.vimeo.com/api/player.js"></script>
+ <script src="js\main-page\main-page-reel.js" defer></script>
+ <script src="js\main-page\main-page-scripts.js" defer></script>
+ <script src="js\main-page\main-page-filter.js" defer></script>
+
+</body>
+</html>
+

@@ -1,0 +1,1705 @@
+@font-face {
+    font-family: 'Helvetica Now Display Bold';
+    src: url('../fonts/HelveticaNowDisplay-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Helvetica Now Display Medium';
+  src: url('../fonts/HelveticaNowDisplay-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'PP NeueBit';
+  src: url('../fonts/PPNeueBit-Bold.otf') format('opentype');
+}
+
+    body {
+      margin: 0px;
+      font-family: 'Helvetica Now Display Bold';  
+      letter-spacing: .5px;
+      background-color: #F5F4E5;
+      overflow-x: hidden;
+    }
+
+    .header {
+      display: flex;
+      justify-content: left;
+      text-align: center;
+      padding: 20px;
+      margin-top: 18px;
+      
+      transition: background-color 0.3s, margin-top 0.3s;
+    }
+    
+
+    .logo_top {
+  position: absolute; /* Esto asegura que el logo se quede en la esquina superior izquierda */
+  top: 5px; /* Alineado a la parte superior */
+  justify-content: left;
+  margin: 0;  /* Asegúrate de que no haya márgenes */
+  padding: 0; /* Asegúrate de que no haya padding extra */
+  z-index: 25;
+  left:20px;
+  }
+
+  .logo_top img {
+  width: 150px;  /* Ajusta el tamaño del logo */
+  height: auto;   /* Mantén la proporción del logo */
+  }
+
+    .logo {
+    position: fixed;
+    display: block;
+    justify-content: left;
+    margin-left: 0px;
+    width: 150px;/* Default black background */
+    color: white;
+    mix-blend-mode: difference; 
+    z-index: 25;
+    left:20px;
+    }
+
+    /* Menu styles */
+    .menu {
+      position: fixed;
+      right: 20px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 20px;
+    
+      
+      mix-blend-mode: difference;   
+      }
+
+   
+    .menu .left, .menu .center, .menu .right, .menu .icon-toggle {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      width: 120px;
+      
+      /* mix-blend-mode: difference; */
+      
+    }
+    .menu img {
+      position: absolute;
+      top: 50%; /* Centra verticalmente */
+      left: 50%; /* Centra horizontalmente */
+      transform: translate(-50%, -50%); /* Ajusta para que la imagen se alinee perfectamente */
+    }
+    
+    /* Estilos para la imagen en la clase .left */
+.menu .left img.default {
+  opacity: 1;
+ 
+}
+
+.menu .left img.hover {
+  opacity: 0;
+
+}
+
+.menu .left:hover img.default {
+  opacity: 0;
+
+}
+
+.menu .left:hover img.hover {
+  opacity: 1;
+
+}
+
+/* Estilos para la imagen en la clase .center */
+.menu .center img.default {
+  opacity: 1;
+
+}
+
+.menu .center img.hover {
+  opacity: 0;
+
+}
+
+.menu .center:hover img.default {
+  opacity: 0;
+
+}
+
+.menu .center:hover img.hover {
+  opacity: 1;
+  
+}
+
+/* Estilos para la imagen en la clase .right */
+.menu .right img.default {
+  opacity: 1;
+  
+}
+
+.menu .right img.hover {
+  opacity: 0;
+
+}
+
+.menu .right:hover img.default {
+  opacity: 0;
+
+}
+
+.menu .right:hover img.hover {
+  opacity: 1;
+ 
+}
+    
+    .knob,
+    .btn-bg {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+
+
+    
+    .btn {
+      position: relative;
+      
+      width: 74px;
+      height: 36px;
+      margin-top: -5px;
+      overflow: visible; /* Ajustado para evitar recortes */
+
+      
+    }
+    
+    .btn.btn-pill,
+    .btn.btn-pill > .btn-bg {
+      border-radius: 100px;
+    }
+    
+    .checkbox {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 3;
+    }
+    
+    .knob {
+      z-index: 2;
+    }
+    
+    .btn-bg {
+      width: 100%;
+      background-color: #000000;
+      transition: 0.3s ease all;
+      z-index: 0;
+      border: 2px solid #ffffff; /* Borde más visible */
+      border-radius: 100px; /* Mantiene el diseño redondeado */
+    }
+    
+    /* Estilo para el Botón */
+    #button-1 .knob:before {
+      content: "OFF";
+      position: absolute;
+      top: 2px;
+      left: 4px;
+      width: 20px;
+      height: 20px;
+      color: #ffffff;
+      font-size: 15px;
+      text-align: center;
+      line-height: 1;
+      padding: 9px 4px;
+      border-radius: 50%;
+      transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    }
+    
+    #button-1 .checkbox:checked + .knob:before {
+      content: "ON";
+      left: 28px;
+      color: #000000; /* Cambia el color de la fuente a blanco */
+    }
+    
+    #button-1 .checkbox:checked ~ .btn-bg {
+      background-color: #ffffff; /* Cambia el fondo a negro */
+    }
+    
+    #button-1 .knob,
+    #button-1 .knob:before,
+    #button-1 .btn-bg {
+      transition: 0.3s ease all;
+    }
+    
+
+   
+.sections {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  z-index: 20;
+  mix-blend-mode: difference; 
+  transition: bottom 0.5s ease;   
+}
+
+.sections .left, .sections .center, .sections .right, .sections .icon-toggle {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 140px;
+  /* mix-blend-mode: difference; */
+}
+
+.sections img {
+  position: absolute;
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta para que la imagen se alinee perfectamente */
+  /* width: 80px; 
+  height: auto; */
+  /* mix-blend-mode: difference; */
+}
+
+/* Estilos para la imagen en la clase .left */
+.sections .left img.default {
+  opacity: 1;
+  z-index: 1;
+}
+
+.sections .left img.hover {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .left:hover img.default {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .left:hover img.hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Estilos para la imagen en la clase .center */
+.sections .center img.default {
+  opacity: 1;
+  z-index: 1;
+}
+
+.sections .center img.hover {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .center:hover img.default {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .center:hover img.hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Estilos para la imagen en la clase .right */
+.sections .right img.default {
+  opacity: 1;
+  z-index: 1;
+}
+
+.sections .right img.hover {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .right:hover img.default {
+  opacity: 0;
+  z-index: 0;
+}
+
+.sections .right:hover img.hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+    .sections a {
+      text-decoration: none;
+    
+      color: inherit; /* Ensures the link color is inherited from the parent */
+      background-color: black; /* Default black background */
+      color: white;
+      mix-blend-mode: difference; /* Invert colors based on the background */
+      text-rendering: geometricprecision;
+    }
+
+  /*   .sections a:hover,
+    .sections a.active {
+      margin-top: -4px;
+      font-family: 'PP NeueBit';
+      font-size: 29px;
+      letter-spacing: 1px;
+      background-color: black; /* Default black background */
+      color: white;
+      mix-blend-mode: difference; /* Invert colors based on the background */
+      text-rendering: geometricprecision; /* Mejorar la precisión de las fuentes */
+  -webkit-font-smoothing: antialiased; /* Suavizado de bordes */
+  -moz-osx-font-smoothing: grayscale;
+    }
+     */
+    
+
+    .header.scrolled {
+  margin-top: -40px;  /* Reduce el margen a 0px */
+  transition: margin-top .5s ease; /* Transición suave para el cambio de margen */
+}
+
+.header.scrolled .logo_top img {
+  margin-top: -150px;  /* Disminuye el tamaño del logo cuando hace scroll */
+  transition: margin-top .5s ease;
+}
+
+/* Contenedor principal para el video y el texto */
+/* Contenedor principal para el video y el texto */
+.main-video-container {
+  display: flex;
+  align-items: center; /* Centra el texto verticalmente con respecto al video */
+  justify-content: space-between;
+  margin-top: 0; /* Reduce el margen superior */
+  padding: 20px;
+  height: calc(100vh - 80px); /* Asegura que ocupe todo el alto menos el header */
+  gap: 10px;
+}
+
+/* Estilos para el video */
+.main-video {
+  flex: 1;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  position: relative;
+  height: 90%; /* Asegura que el video ocupe todo el alto del contenedor */
+  /* overflow: hidden;  *//* Oculta el contenido que se recorta */
+  /* z-index: 5; */
+  border: 1px solid black;
+  top: -45px;
+ 
+}
+
+.main-video video {
+  width: 100%; /* El video ocupa todo el ancho del viewport */
+  height: 100%; /* El video ocupa todo el alto del viewport */
+  object-fit: cover; /* Mantiene la proporción y recorta el contenido excedente */
+  /* aspect-ratio: 16 / 9;  *//* Mantiene la proporción exacta 16:9 */
+  position: absolute; /* Asegura que el video se posicione correctamente */
+  
+  left: 0;
+  /* border: 1px solid black; */
+  /* z-index: 5; */
+}
+
+/* Estilos para el texto */
+.main-caption {
+  /* flex-basis: 15%; */ /* El texto ocupa el 35% del espacio del contenedor */
+  top: 0;
+  text-align: left;
+  width: 25%;
+  line-height: 1.2;
+  color: #000;
+  padding: 20px; /* Espaciado interno */
+  box-sizing: border-box; /* Asegura que el padding no desborde el contenedor */
+  
+  }
+  
+
+.main-caption h1 {
+  font-size: 46px; /* Tamaño del título */
+  margin: 0;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+/* Responsividad */
+@media (max-width: 1200px) {
+  .main-caption h1 {
+  font-size: 36px; /* Tamaño del título */
+  margin: 0;
+  font-weight: bold;
+  line-height: 1;
+}
+.main-caption {
+  /* flex-basis: 15%; */ /* El texto ocupa el 35% del espacio del contenedor */
+  
+  width: 30%;
+  
+  
+  }
+
+}
+
+@media (max-width: 768px) {
+  .main-video-container {
+    flex-direction: column; /* Coloca el texto debajo del video */
+   /*  height: auto; */ /* Ajusta dinámicamente la altura */
+    padding: 10px; /* Reduce el padding en móviles */
+    
+  }
+
+  .main-video {
+    width: 100%; /* Video ocupa todo el ancho del contenedor */
+    height: 60%; /* Mantiene la proporción del video */
+    position: relative; /* Corrige el comportamiento de position: absolute */
+    top: 0%;
+    /* object-fit: contain; */ /* Asegura que el video no se recorte */
+    border: 1px solid black;
+  }
+
+  .main-video video {
+    width: 100%; /* Video ocupa todo el ancho del contenedor */
+    height: 100%; /* Mantiene la proporción del video */
+    position: relative; /* Corrige el comportamiento de position: absolute */
+    /* object-fit: contain; */ /* Asegura que el video no se recorte */
+  }
+
+  .main-caption {
+    width: 60%; /* El texto ocupa todo el ancho */
+    text-align: center; /* Centra el texto */
+    
+    height: 20%;
+    padding: 10px; /* Reduce el padding para móviles */
+   
+  }
+
+  .main-caption h1 {
+    font-size: 26px; /* Tamaño ajustado del título */
+  }
+}
+
+
+/* Grid-container para videos secundarios */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas para videos secundarios */
+  gap: 20px; /* Espaciado entre elementos */
+  padding: 20px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* Mantiene proporción 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+
+#my-video::-webkit-media-controls {
+  display: none !important;
+}
+#my-video::-webkit-media-controls-overlay-play-button {
+  display: none !important;
+}
+
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Opcional: elimina el borde del iframe */
+}
+/* .floating-nav {
+  position: fixed;
+  bottom: 20px;
+  width: 100px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black; 
+  color: white;
+  mix-blend-mode: difference;
+  text-rendering: geometricprecision; 
+  -webkit-font-smoothing: antialiased; 
+  -moz-osx-font-smoothing: grayscale;
+  transition: bottom 0.5s ease; 
+  font-size: 26px;
+  text-align: center;
+  cursor: pointer;
+  z-index: 1000;
+  transition: bottom 0.5s ease; 
+ } */
+
+/* Floating navigation styles */
+.floating-nav {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  z-index: 20;
+  bottom: 20px; /* Ajusta la posición vertical si es necesario */
+  left: 0; /* Asegura que el contenedor esté alineado al borde izquierdo de la pantalla */
+  right: 0;
+  mix-blend-mode: difference; /* Asegura que el contenedor esté alineado al borde derecho de la pantalla */
+  transition: bottom 0.5s ease;   
+}
+
+.floating-nav .next {
+  position: relative;
+  display: flex;
+  justify-content: right;
+  align-items: center; /* Centra las imágenes verticalmente */
+  right: 35px; /* Alinea al borde derecho */
+  width: 120px;
+  height: 100px;
+  /* mix-blend-mode: difference; */ /* Asegúrate de que el contenedor tenga suficiente altura */
+}
+
+.floating-nav .previous {
+  position: relative;
+  display: flex;
+  justify-content: left;
+  align-items: center; /* Centra las imágenes verticalmente */
+  left: 35px; /* Alinea al borde izquierdo */
+  width: 120px;
+  height: 100px;
+  /* mix-blend-mode: difference; */ /* Asegúrate de que el contenedor tenga suficiente altura */
+}
+
+.floating-nav img {
+  position: absolute;
+  left: 0;
+  width: auto; /* Ajusta el tamaño de la imagen */
+  height: 30px;
+  /* mix-blend-mode: difference; */ /* Si realmente deseas el efecto de mezcla, déjalo */
+}
+
+
+/* Estilos para la imagen en la clase .previous */
+.floating-nav .previous img.default {
+  opacity: 1;
+  z-index: 1;
+}
+
+.floating-nav .previous img.hover {
+  opacity: 0;
+  z-index: 0;
+}
+
+.floating-nav .previous:hover img.default {
+  opacity: 0;
+  z-index: 0;
+}
+
+.floating-nav .previous:hover img.hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* Estilos para la imagen en la clase .next */
+.floating-nav .next img.default {
+  opacity: 1;
+  z-index: 1;
+}
+
+.floating-nav .next img.hover {
+  opacity: 0;
+  z-index: 0;
+}
+
+.floating-nav .next:hover img.default {
+  opacity: 0;
+  z-index: 0;
+}
+
+.floating-nav .next:hover img.hover {
+  opacity: 1;
+  z-index: 1;
+}
+
+
+
+
+
+
+
+@media (max-width:768px) {
+
+  .floating-nav img {
+    position: absolute;
+    left: 0;
+    width: auto; /* Ajusta el tamaño de la imagen */
+    height: 20px;
+    mix-blend-mode: difference; /* Si realmente deseas el efecto de mezcla, déjalo */
+  }
+}
+
+
+
+    /* Updated grid-container to have two columns for larger screens */
+    /*.grid-container {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); 
+      gap: 5px;
+      padding: 20px;
+      z-index: 5;
+      margin-top: -15px;
+    }*/
+
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+      padding: 5px;
+      position: relative;
+    }
+
+    .video-container {
+      width: 100%;
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border: 1px solid black;
+    }
+
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .caption {
+      
+      color: #000000;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .caption_one {
+      
+      color: #000000;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .caption_two {
+      
+      color: #000000;
+      text-align: right;
+      font-size: 14px;
+    }
+
+    .text-container {
+      margin-top: 5px;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    footer {
+    padding: 20px 0px;
+    background-color: #f7f7e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #000000;
+    position: relative;
+    bottom: 0;
+}
+
+.top-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Apilamos los elementos verticalmente */
+    align-items: flex-start; /* Alineamos los enlaces a la izquierda */
+    margin-left: 50px;
+    margin-bottom: 70px;
+}
+
+.links {
+    display: flex; /* Los enlaces se mantienen en una fila */
+    flex-wrap: wrap; /* Permite que los enlaces ocupen nuevas líneas si es necesario */
+    margin-bottom: 5px;
+    z-index: 10;
+}
+
+.links a,
+.email a {
+    text-decoration: none;
+    margin-right: 20px;
+    color: black;
+    position: relative; /* Necesario para ::after */
+}
+
+.links a::after,
+.email a::after {
+    content: ''; /* Elemento decorativo */
+    position: absolute;
+    left: 0;
+    bottom: -2px; /* Ajusta la posición del subrayado */
+    width: 0;
+    height: 2px;
+    background-color: black;
+    transition: width 0.3s ease-in-out; /* Animación suave */
+}
+
+.links a:hover::after,
+.email a:hover::after {
+    width: 100%; /* El subrayado se expande al 100% en hover */
+}
+
+.email {
+    margin-top: 10px; /* Separación entre los enlaces y el correo */
+}
+
+.email a {
+    font-weight: bold; /* Opcional: destacamos el correo */
+}
+        .bottom-footer {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            overflow: hidden;
+           
+        }
+        .bottom-footer span {
+            font-size: 18px;
+            margin-right: 0px;
+            white-space: nowrap;
+        }
+        .icon {
+            margin-left: 20px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f36c21;
+            border-radius: 50%;
+            position: relative;
+        }
+        .icon::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 14px;
+            height: 14px;
+            border: 2px solid #f36c21;
+            border-radius: 50%;
+        }
+        .footer-icon {
+    position: absolute; /* Posicionamiento absoluto dentro del footer */
+    top: 20px; /* Separación desde el borde superior */
+    right: 20px; /* Separación desde el borde derecho */
+    width: 100px; /* Ajusta el tamaño del ícono */
+    height: auto; /* Mantén la proporción */
+    z-index: 0; /* Asegura que esté por encima de otros elementos */
+}
+        .header.scrolled {
+        margin-top: -30px;  /* Reduce el margen a 0px */
+       transition: margin-top .5s ease; /* Transición suave para el cambio de margen */
+        }
+       /*  .p5-container {
+       position: absolute;
+       top: 0;
+       left: 0;
+       z-index: 1; 
+       pointer-events: auto;
+       width: 100%;
+       height: 100%;
+       } */
+       .svg-chain {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #f7f7e9;
+    overflow: hidden;
+    padding: 20px 0;
+    white-space: nowrap;
+    position: relative;
+}
+
+.scroll-container {
+    display: flex;
+    transform: translateX(0); /* Posición inicial */
+    transition: transform 0.1s linear; /* Movimiento suave */
+    will-change: transform; /* Optimización de rendimiento */
+}
+
+.scroll-container svg {
+    height: 60px; /* Tamaño fijo */
+    width: auto; /* Mantén la proporción */
+    margin-right: 0px; /* Espaciado entre SVGs */
+}
+
+    /* Media query for mobile view - single column layout */
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;  /* Single column for mobile */
+        margin-top: 0px;
+      }
+    }
+    
+ 
+
+
+@media (max-width: 768px) {
+  .logo_top img {
+    width: 120px  /* Hacer el logo top más grande en pantallas móviles */
+  }
+
+  .logo {
+    width: 120px; /* Hacer el logo principal más grande en pantallas móviles */
+  }
+  .header {
+    margin-top: 15px;
+    padding: 15px;
+  }
+
+   .menu {
+    font-size: 16px;  
+  }
+
+  .menu .left, .menu .center, .menu .right, .menu .icon-toggle {
+    width: 90px;
+  } 
+  .sections .left, .sections .center, .sections .right {
+    width: 100px;
+    font-size: 1em;  /* Ajuste adicional en pantallas extremadamente pequeñas */
+  }
+ 
+  .btn {
+    position: relative;
+    
+    width: 54px;
+    height: 26px;
+    margin-top: -2px;
+  }
+    #button-1 .knob:before {
+      content: "OFF";
+      position: absolute;
+      top: -1px;
+      left: 4px;
+      width: 20px;
+      height: 20px;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1;
+      
+      border-radius: 50%;
+      transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+    }
+    
+    #button-1 .checkbox:checked + .knob:before {
+      content: "ON";
+      left: 24px;
+      color: #000000; /* Cambia el color de la fuente a blanco */
+    }
+
+}
+
+@media (max-width: 480px) {
+  
+  .menu .left, .menu .center, .menu .right, .menu .icon-toggle {
+    width: 60px;
+    font-size: 1em;  
+  } 
+  .sections .left, .sections .center, .sections .right {
+    width: 100px;
+    font-size: 1em;  /* Ajuste adicional en pantallas extremadamente pequeñas */
+  }
+  .logo {
+    width: 100px; /* Hacer el logo principal más grande en pantallas móviles */
+    margin-left: 5px;
+  }
+  .header {
+    margin-top: 15px;
+    padding: 10px;
+  }
+  
+  .logo_top img {
+    width: 100px; /* Hacer el logo principal más grande en pantallas móviles */
+    margin-left: 5px;
+  }
+}
+
+
+    /* Estilos para el video */
+     .main-video {
+        flex: 1;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        position: relative;
+        height: 90%; /* Asegura que el video ocupe todo el alto del contenedor */
+        overflow: hidden; /* Oculta el contenido que se recorta */
+        z-index: 5;
+        border: 1px solid black;
+        top: -45px;
+      }
+
+      .main-video-container {
+        display: flex;
+        align-items: center; 
+        justify-content: space-between;
+        margin-top: 0;  *//* Reduce el margen superior */
+        padding: 20px;
+        height: calc(100vh - 80px); 
+        gap: 10px; 
+      }
+
+      .main-video iframe {
+        position: absolute;
+        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+      }
+      
+      
+    
+    .main-video.fullscreen-active {
+      width: 100%;
+      height: 100%;
+      background-color: #F5F4E5; /* Fondo negro para la pantalla completa */
+      
+  }
+    
+
+/* Contenedor principal */
+.main-video-container-case {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  gap: 10px;
+  
+}
+
+/* Mantener proporción 16:9 directamente */
+.main-video-casestudy {
+  position: relative;
+  width: 80%; /* Ajusta al ancho del contenedor */
+  max-width: 100%; /* Opcional: límite de ancho */
+  aspect-ratio: 16 / 9; /* Proporción 16:9 */
+  overflow: hidden;
+  border: 1px solid black; /* Opcional */
+  margin-top: -20px;
+}
+
+@media (max-width: 1200px) {
+  .main-video-casestudy {
+  width: 100%;
+  margin-top: 0px;
+  }
+}
+
+/* Estilo del iframe */
+.main-video-casestudy iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Sin borde */
+}
+
+
+.
+
+
+      /*
+      .main-video-container {
+        display: flex;
+        align-items: center; 
+        justify-content: space-between;
+        margin-top: 0;  
+        padding: 20px;
+        height: calc(100vh - 80px); 
+        gap: 10px; 
+      }
+
+   
+    .main-video-casestudy {
+      flex: 1;
+      display: flex;
+      align-items: start;
+      justify-content: start;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      height: 90%;  
+      overflow: hidden; 
+      z-index: 5;
+      border: 1px solid black;
+      top: -45px;
+    }
+
+
+
+   .main-video iframe {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%; 
+        height: 100%;
+    } */
+
+     /*
+      .main-video iframe {
+        /* position: absolute; 
+        width: 100%; 
+        height: 100%;
+    } */
+
+      /* Estilos para el texto */
+    .main-caption {
+      top: 0;
+      text-align: left;
+      width: 25%;
+      line-height: 1.2;
+      color: #000;
+      padding: 20px; /* Espaciado interno */
+      box-sizing: border-box; /* Asegura que el padding no desborde el contenedor */
+    }
+
+    .main-caption h1 {
+      font-size: 46px; /* Tamaño del título */
+      margin: 0;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    /* Responsividad */
+    @media (max-width: 1200px) {
+      .main-caption h1 {
+        font-size: 36px; /* Tamaño del título */
+        margin: 0;
+        font-weight: bold;
+        line-height: 1;
+      }
+      .main-caption {
+        width: 30%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .main-video-container {
+        flex-direction: column; /* Coloca el texto debajo del video */
+        padding: 10px; /* Reduce el padding en móviles */
+      }
+
+      .main-video {
+        width: 100%; /* Video ocupa todo el ancho del contenedor */
+        height: 60%; /* Mantiene la proporción del video */
+        position: relative; /* Corrige el comportamiento de position: absolute */
+        top: 0%;
+        border: 1px solid black;
+      }
+
+      /* .main-video iframe {
+        width: 100%; 
+        height: 100%; 
+        position: relative; 
+      } */
+
+      .main-caption {
+        width: 60%; /* El texto ocupa todo el ancho */
+        text-align: center; /* Centra el texto */
+        height: 20%;
+        padding: 10px; /* Reduce el padding para móviles */
+      }
+
+      .main-caption h1 {
+        font-size: 26px; /* Tamaño ajustado del título */
+      }
+    }
+
+   
+/* Efecto de escalado en hover */
+.custom-button:hover,
+.sound-button:hover,
+.fullscreen-button:hover {
+    transform: scale(1.2);
+
+}
+
+/* Mostrar los botones y la barra de progreso en hover */
+.main-video:hover .custom-button,
+.main-video:hover .sound-button,
+.main-video:hover .fullscreen-button,
+.main-video:hover .progress-container,
+.main-video:hover .progress-container .progress-bar {
+    opacity: 1;
+    visibility: visible;
+}
+
+.video-container:hover .custom-button,
+.video-container:hover .sound-button,
+.video-container:hover .fullscreen-button,
+.video-container:hover .progress-container,
+.video-container:hover .progress-container .progress-bar {
+    opacity: 1;
+    visibility: visible;
+}
+
+.main-video-casestudy:hover .custom-button,
+.main-video-casestudy:hover .sound-button,
+.main-video-casestudy:hover .fullscreen-button,
+.main-video-casestudy:hover .progress-container,
+.main-video-casestudy:hover .progress-container .progress-bar {
+    opacity: 1;
+    visibility: visible;
+}
+
+.custom-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Botones personalizados */
+.custom-button {
+    position: absolute;
+    bottom: 10px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.custom-button svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Botón de sonido */
+.sound-button {
+    position: absolute;
+    bottom: 7px;
+    right: 110px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Botón de pantalla completa */
+.fullscreen-button {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Contenedor de progreso */
+.progress-container {
+    position: absolute;
+    bottom: 22px;
+    left: 13%;
+    width: 65%;
+    height: 12px;
+    background-color: black;
+    border: 3.5px solid #000000;
+    z-index: 100;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Barra de progreso */
+.progress-container .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #F5F4E5;
+    transition: width 0.1s linear;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+@media (max-width: 1200px) {
+  .progress-container {
+    width: 46%;
+    left: 20%;
+  }}
+        
+        @media (max-width: 768px) {
+            .progress-container {
+                left: 20%; /* Centrado horizontal con margen */
+            width: 37%;
+
+            } }
+
+
+            /* Reset básico */
+
+            .hidden {
+              display: none; /* Ya no usado, mantenido por compatibilidad */
+          }
+          
+          .show {
+              display: block; /* Usado con toggle para visibilidad */
+          }
+          
+          .hide {
+              display: none; /* Usado con toggle para visibilidad */
+          }
+          
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Contenedor principal */
+.main-container {
+  display: flex;
+  width: 100%;
+  height: 55vh; /* Ajusta al alto de la pantalla */
+  gap: 20px; /* Espacio entre las columnas */
+  padding: 30px;
+  margin-top: -25px;
+}
+
+/* Contenedor de información */
+.info-container {
+  flex: 60%; /* Ocupa el 70% del ancho */
+  
+  
+ font-family: 'Helvetica Now Display Medium';
+  overflow-y: auto; /* Habilita scroll si hay mucho contenido */
+}
+
+/* Contenedor de créditos */
+.credits-container {
+  flex: 40%; /* Ocupa el 30% del ancho */
+  
+  padding: 0px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto; /* Habilita scroll si hay mucho contenido */
+}
+
+/* Créditos divididos en columnas */
+.credits-columns {
+  display: flex;
+  gap: 10px; /* Espacio entre columnas */
+}
+
+/* Cada columna dentro de los créditos */
+.column {
+  flex: 1; /* Las columnas ocupan igual espacio */
+}
+
+/* Diseño responsivo para dispositivos móviles */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column; /* Cambia el layout a una columna */
+    height: auto; /* Ajusta la altura automáticamente */
+    gap: 10px; /* Espacio entre las divisiones apiladas */
+    padding: 30px;
+    height: 100vh;
+  }
+
+  .info-container, .credits-container {
+    flex: none; /* Resetea el ancho basado en flex */
+    width: 100%; /* Cada contenedor ocupa el ancho completo */
+  }
+}
+
+
+/* Estilo opcional para los textos */
+h1, h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-family: 'Helvetica Now Display Bold'
+}
+
+p {
+  margin-bottom: 10px;
+  line-height: 1;
+  font-family: 'Helvetica Now Display Medium'
+}
+
+e {
+  font-family: 'Helvetica Now Display Bold'
+}
+ ---------
+strong {
+  position: relative;
+  font-weight: bold;
+  color: black; /* Ajusta según el diseño */
+}
+
+strong::after {
+  content: ''; /* Línea decorativa */
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Ajusta según la distancia deseada del texto */
+  width: 0;
+  height: 2px; /* Grosor de la línea */
+  background-color: black; /* Color del subrayado */
+  transition: width 0.3s ease-in-out; /* Animación suave */
+}
+
+strong:hover::after {
+  width: 100%; /* La línea se expande al 100% del ancho del texto */
+}
+
+----
+
+
+body {
+  margin: 0px;
+  font-family: Helvetica Now Display ExtraBold;
+  letter-spacing: 1px;
+  background-color: #F5F4E5;
+  overflow-x: hidden;
+}
+
+/* .grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px;
+  padding: 20px;
+  margin-top: -15px;
+} */
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  position: relative;
+}
+
+.video-container {
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border: 1px solid black;
+}
+
+.video-container video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  color: #000000;
+  text-align: center;
+  font-size: 14px;
+}
+
+.caption_one {
+  color: #000000;
+  text-align: left;
+  font-size: 14px;
+}
+
+.caption_two {
+  color: #000000;
+  text-align: right;
+  font-size: 14px;
+}
+
+.text-container {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.links a,
+.email a {
+  text-decoration: none;
+  margin-right: 20px;
+  color: black;
+  position: relative;
+}
+
+.links a::after,
+.email a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease-in-out;
+}
+
+.links a:hover::after,
+.email a:hover::after {
+  width: 100%;
+}
+
+.email a {
+  font-weight: bold;
+}
+
+strong {
+  position: relative;
+  font-weight: bold;
+  color: black;
+}
+
+strong::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background-color: black;
+  transition: width 0.3s ease-in-out;
+}
+
+strong:hover::after {
+  width: 100%;
+}
+
+canvas {
+  position: fixed !important; /* Forzar el canvas a ser fijo */
+  top: 0;
+  left: 0;
+  pointer-events: none; /* Permitir interacción con elementos debajo */
+  z-index: 20; /* Asegura que esté por encima de otros elementos */
+}
+
+
+
+.draggable {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+  margin-bottom: 20%;
+  font-family: Helvetica Now Display Medium;
+}
+
+.about-section {
+  display: grid;
+  max-width: 80%;
+  margin-left: 30%;
+  margin-right: 5%;
+  align-items: start;
+}
+
+.about-section img {
+  width: 80px;
+  height: auto;
+}
+
+.about-section h1 {
+  font-size: 36px;
+}
+
+.about-section p {
+  font-size: 20px;
+}
+
+.contact-info {
+  margin-top: 50px;
+  font-size: 20px;
+}
+
+.contact-info div {
+  margin-bottom: 10px;
+}
+
+.contact-info a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+  .about-section {
+    display: grid;
+    max-width: 90%;
+    margin-left: 5%;
+    align-items: start;
+    margin-top: 25%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-section p {
+    font-size: 26px;
+  }
+
+  .about-section {
+    display: grid;
+    max-width: 98%;
+    margin-left: 5%;
+    align-items: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section p {
+    font-size: 22px;
+  }
+}
+
+.draggable-yinyang {
+  top: 10%;
+  right: 1%;
+  width: 100px;
+}
+
+.draggable-face {
+  top: 15%;
+  left: 5%;
+  width: 25%;
+}
+
+.draggable-tree {
+  top: 8%;
+  left: 28%;
+  width: 70px;
+}
+
+.draggable-sun {
+  bottom: 30%;
+  left: 80%;
+  width: 140px;
+}
+
+.draggable-fire {
+  bottom: 35%;
+  left: 22%;
+  width: 120px;
+}
+
+@media (max-width: 1200px) {
+  .draggable-yinyang {
+    top: 35%;
+    right: 3%;
+    width: 80px;
+  }
+
+  .draggable-face {
+    top: 12%;
+    left: 30%;
+    width: 30%;
+  }
+
+  .draggable-tree {
+    top: 30%;
+    left: 10%;
+    width: 70px;
+  }
+
+  .draggable-sun {
+    bottom: 16%;
+    left: 70%;
+    width: 110px;
+  }
+
+  .draggable-fire {
+    bottom: 10%;
+    left: 12%;
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .draggable-yinyang {
+    top: 20%;
+    right: 5%;
+    width: 60px;
+  }
+
+  .draggable-face {
+    top: 10%;
+    left: 32%;
+    width: 35%;
+  }
+
+  .draggable-tree {
+    top: 22%;
+    left: 2%;
+    width: 50px;
+  }
+
+  .draggable-sun {
+    bottom: -2%;
+    right: 3%;
+    width: 90px;
+  }
+
+  .draggable-fire {
+    bottom: -2%;
+    left: 5%;
+    width: 70px;
+  }
+
+ 
+
+}
