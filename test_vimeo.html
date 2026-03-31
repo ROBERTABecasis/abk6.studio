@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vimeo Hover Play/Pause con Miniaturas</title>
+  <style>
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 640px;
+      height: 360px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    .video-thumbnail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+      background: #000;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: none; /* Ocultado hasta que se cargue */
+      z-index: 2;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <!-- Contenedores de videos -->
+  <div class="video-container" data-video-id="378324697">
+    <img class="video-thumbnail" src="" alt="Thumbnail">
+    <iframe 
+      src="https://player.vimeo.com/video/378324697?h=b114ee9158&muted=1&controls=0" 
+      allow="autoplay; fullscreen; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="video-container" data-video-id="1038194269">
+    <img class="video-thumbnail" src="" alt="Thumbnail">
+    <iframe 
+      src="https://player.vimeo.com/video/1038194269?h=b114ee9158&muted=1&controls=0" 
+      allow="autoplay; fullscreen; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+  <div class="video-container" data-video-id="1038194150">
+    <img class="video-thumbnail" src="" alt="Thumbnail">
+    <iframe 
+      src="https://player.vimeo.com/video/1038194150?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+      allow="autoplay; fullscreen; picture-in-picture" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    // Seleccionar todos los contenedores de videos
+    const videoContainers = document.querySelectorAll('.video-container');
+
+    videoContainers.forEach(async container => {
+      const videoId = container.getAttribute('data-video-id');
+      const iframe = container.querySelector('iframe');
+      const thumbnail = container.querySelector('.video-thumbnail');
+      const player = new Vimeo.Player(iframe);
+
+      // Obtener la miniatura desde la API de Vimeo
+      try {
+        const response = await fetch(`https://vimeo.com/api/v2/video/${videoId}.json`);
+        const data = await response.json();
+        thumbnail.src = data[0].thumbnail_large; // Configurar la miniatura
+      } catch (error) {
+        console.error(`Error al obtener la miniatura para el video ${videoId}:`, error);
+      }
+
+      // Mostrar el iframe cuando está cargado
+      player.ready().then(() => {
+        iframe.style.display = 'block'; // Mostrar iframe
+        thumbnail.style.display = 'none'; // Ocultar miniatura
+      });
+
+      // Reproducir el video al entrar con el mouse
+      container.addEventListener('mouseenter', () => {
+        player.play().catch(error => console.error('Error al reproducir:', error));
+      });
+
+      // Pausar el video al salir con el mouse
+      container.addEventListener('mouseleave', () => {
+        player.pause().catch(error => console.error('Error al pausar:', error));
+      });
+    });
+  </script>
+</body>
+</html>

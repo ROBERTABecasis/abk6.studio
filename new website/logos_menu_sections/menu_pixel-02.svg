@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="pixel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.4 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M7.38,16.5v-3.59h-1.29v-4.8h-1.3v-3.59h2.59v3.59h1.3v4.8h1.95v-4.8h1.29v-3.59h2.6v3.59h1.3v4.8h1.94v-4.8h1.3v-3.59h2.59v3.59h-1.3v4.8h-1.3v3.59h-3.9v-3.59h-1.3v-4.8h-1.3v4.8h-1.3v3.59h-3.9Z"/>
+  <path class="cls-1" d="M26.6,16.5v-1.2h-1.2v-1.2h-1.2V6.91h1.2v-1.2h1.2v-1.2h6v1.2h1.2v1.2h1.2v7.2h-1.2v1.2h-1.2v1.2h-6Zm4.79-2.39v-1.2h1.2v-4.8h-1.2v-1.2h-3.6v1.2h-1.2v4.8h1.2v1.2h3.6Z"/>
+  <path class="cls-1" d="M38,16.5V4.52h3.01v1.2h1.2v-1.2h3v2.39h-3v1.2h-1.2v8.39h-3.01Z"/>
+  <path class="cls-1" d="M47.23,16.5V.2h2.88V9.31h1.2v-1.21h1.21v-1.2h1.2v-1.2h1.2v-1.2h3v1.2h-1.2v1.2h-1.21v1.2h-1.2v1.21h-1.2v2.39h1.2v1.21h1.2v1.2h1.21v1.2h1.2v1.2h-3v-1.2h-1.2v-1.2h-1.2v-1.2h-1.21v-1.21h-1.2v4.79h-2.88Z"/>
+</svg>
