@@ -9,11 +9,15 @@ const startDrag = (e, element) => {
     draggedElement = element;
 
     const rect = element.getBoundingClientRect();
-    const clientX = e.type === 'mousedown' ? e.clientX : e.touches[0].clientX;
-    const clientY = e.type === 'mousedown' ? e.clientY : e.touches[0].clientY;
+    // Usamos coordenadas de página (incluyen el scroll) porque el elemento se
+    // posiciona con left/top absolutos respecto al documento, no al viewport.
+    // Si se mezclan con clientX/clientY (relativas al viewport), el elemento
+    // salta hacia arriba una vez la página está scrolleada.
+    const pageX = e.type === 'mousedown' ? e.pageX : e.touches[0].pageX;
+    const pageY = e.type === 'mousedown' ? e.pageY : e.touches[0].pageY;
 
-    offsetX = clientX - rect.left;
-    offsetY = clientY - rect.top;
+    offsetX = pageX - (rect.left + window.scrollX);
+    offsetY = pageY - (rect.top + window.scrollY);
 
     element.style.cursor = 'grabbing';
     e.preventDefault(); // Evita el scroll u otros comportamientos predeterminados
@@ -22,11 +26,11 @@ const startDrag = (e, element) => {
 // Función para mover el elemento
 const moveDrag = (e) => {
     if (isDragging && draggedElement) {
-        const clientX = e.type === 'mousemove' ? e.clientX : e.touches[0].clientX;
-        const clientY = e.type === 'mousemove' ? e.clientY : e.touches[0].clientY;
+        const pageX = e.type === 'mousemove' ? e.pageX : e.touches[0].pageX;
+        const pageY = e.type === 'mousemove' ? e.pageY : e.touches[0].pageY;
 
-        const newX = clientX - offsetX;
-        const newY = clientY - offsetY;
+        const newX = pageX - offsetX;
+        const newY = pageY - offsetY;
 
         draggedElement.style.left = `${newX}px`;
         draggedElement.style.top = `${newY}px`;
