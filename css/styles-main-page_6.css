@@ -514,14 +514,17 @@
   display: flex;
   justify-content: space-between;
   font-size: 20px;
- 
-  bottom: 0; /* Ajusta la posición vertical si es necesario */
+
+  /* En Safari mobile la barra inferior del navegador tapa los botones si se
+     pegan al borde; sumamos el safe-area-inset para dejarlos siempre visibles. */
+  bottom: max(0px, env(safe-area-inset-bottom));
   left: 0; /* Asegura que el contenedor esté alineado al borde izquierdo de la pantalla */
   right: 0;
   mix-blend-mode: difference; /* Asegura que el contenedor esté alineado al borde derecho de la pantalla */
-  transition: bottom 0.5s ease; 
-  margin-right: 20px; 
-  margin-left: 20px; 
+  transition: bottom 0.5s ease;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding-bottom: 10px;
 }
 
 .floating-nav .next {
@@ -1162,6 +1165,11 @@ canvas {
     }
 
    
+/* Estos :hover solo deben aplicarse en dispositivos con ratón real: en
+   touch, un :hover en un ancestro hace que Safari/Chrome necesiten un
+   primer toque para "simular" el hover y un segundo toque para el click. */
+@media (hover: hover) and (pointer: fine) {
+
 /* Efecto de escalado en hover */
 .custom-button:hover,
 .sound-button:hover,
@@ -1196,6 +1204,8 @@ canvas {
 .main-video-casestudy:hover .progress-container .progress-bar {
     opacity: 1;
     visibility: visible;
+}
+
 }
 
 /* En touch (mobile) no existeix :hover, así que mostramos los controles siempre */
