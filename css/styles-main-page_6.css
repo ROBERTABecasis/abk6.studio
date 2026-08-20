@@ -514,6 +514,9 @@
   display: flex;
   justify-content: space-between;
   font-size: 20px;
+  /* Los controles del reproductor (.fullscreen-button, .sound-button...)
+     usan z-index: 10; sin esto quedaban por debajo cuando coinciden en pantalla. */
+  z-index: 50;
 
   /* En Safari mobile la barra inferior del navegador tapa los botones si se
      pegan al borde; sumamos el safe-area-inset para dejarlos siempre visibles. */
