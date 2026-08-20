@@ -142,19 +142,39 @@ document.querySelectorAll('.grid-item').forEach(item => {
     }
 });
 
-if (lazyMobileVideos.length && 'IntersectionObserver' in window) {
-    const videoVisibilityObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                video.play().catch(() => {});
-            } else {
+if (lazyMobileVideos.length) {
+    // No usamos IntersectionObserver: en Safari/iOS su estado "isIntersecting"
+    // puede quedarse desactualizado cuando la barra de direcciones se
+    // muestra/oculta durante el scroll (cambia el visualViewport), y algunos
+    // videos se quedaban reproduciendo aunque ya no estuvieran en pantalla.
+    // Recalculamos directamente con getBoundingClientRect en cada scroll,
+    // que siempre reflit la posición real.
+    let ticking = false;
+
+    const updateVideoPlayback = () => {
+        const viewportHeight = window.innerHeight;
+        lazyMobileVideos.forEach((video) => {
+            const rect = video.getBoundingClientRect();
+            const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
+            if (isVisible) {
+                if (video.paused) video.play().catch(() => {});
+            } else if (!video.paused) {
                 video.pause();
             }
         });
-    }, { rootMargin: '200px 0px', threshold: 0.25 });
+        ticking = false;
+    };
 
-    lazyMobileVideos.forEach((video) => videoVisibilityObserver.observe(video));
+    const onScrollOrResize = () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(updateVideoPlayback);
+        }
+    };
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+    updateVideoPlayback();
 }
 
 
