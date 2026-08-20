@@ -97,20 +97,26 @@ document.querySelectorAll('.grid-item video').forEach(video => {
     }
 });
 
+const lazyMobileVideos = [];
+
 document.querySelectorAll('.grid-item').forEach(item => {
     const video = item.querySelector('video');
+    if (!video) return; // Algunos grid-item solo tienen una imagen, sin video
+
     const link = item.closest('a');
 
     // Detectar si es móvil
     const isMobile = /Mobi|Android/i.test(navigator.userAgent);
 
     if (isMobile) {
-        // Configurar el video para que se reproduzca automáticamente
-        video.setAttribute('autoplay', true);
+        // No usamos autoplay/preload aquí: los ~20 videos se pondrían a
+        // descargar todos a la vez al cargar la página. En su lugar se
+        // reproducen solo mientras están dentro (o cerca) del viewport,
+        // ver el IntersectionObserver más abajo.
         video.setAttribute('muted', true);
         video.setAttribute('playsinline', true);
         video.loop = true;
-        video.play();
+        lazyMobileVideos.push(video);
 
         // Abrir el enlace al hacer clic en el contenedor
         item.addEventListener('click', () => {
@@ -135,6 +141,21 @@ document.querySelectorAll('.grid-item').forEach(item => {
         });
     }
 });
+
+if (lazyMobileVideos.length && 'IntersectionObserver' in window) {
+    const videoVisibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    }, { rootMargin: '200px 0px', threshold: 0.25 });
+
+    lazyMobileVideos.forEach((video) => videoVisibilityObserver.observe(video));
+}
 
 
 
