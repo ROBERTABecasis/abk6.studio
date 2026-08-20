@@ -153,15 +153,35 @@ if (lazyMobileVideos.length) {
 
     const updateVideoPlayback = () => {
         const viewportHeight = window.innerHeight;
+        const viewportCenter = viewportHeight / 2;
+
+        // De todos los videos visibles, solo reproducimos el que está más
+        // centrado en pantalla; el resto se pausan siempre, aunque también
+        // sean parcialmente visibles.
+        let activeVideo = null;
+        let closestDistance = Infinity;
+
         lazyMobileVideos.forEach((video) => {
             const rect = video.getBoundingClientRect();
             const isVisible = rect.bottom > 0 && rect.top < viewportHeight;
-            if (isVisible) {
+            if (!isVisible) return;
+
+            const videoCenter = rect.top + rect.height / 2;
+            const distance = Math.abs(videoCenter - viewportCenter);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                activeVideo = video;
+            }
+        });
+
+        lazyMobileVideos.forEach((video) => {
+            if (video === activeVideo) {
                 if (video.paused) video.play().catch(() => {});
             } else if (!video.paused) {
                 video.pause();
             }
         });
+
         ticking = false;
     };
 
