@@ -130,15 +130,82 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Alternar pantalla completa
+        // iOS Safari no implementa el Fullscreen API en elementos que no sean <video>
+        // (requestFullscreen puede no existir, lanzar de forma síncrona, o rechazar la
+        // promesa en silencio). Por eso usamos siempre un fallback manual con CSS
+        // ("fullscreen-active") en cuanto el método nativo falla por cualquier motivo.
+        function enterFallbackFullscreen() {
+            videoContainer.classList.add("fullscreen-active");
+            // El propio JS fija "position: relative" inline sobre el contenedor,
+            // así que un inline style nuevo es la única forma fiable de ganarle a eso.
+            videoContainer.style.position = "fixed";
+            videoContainer.style.top = "0";
+            videoContainer.style.left = "0";
+            videoContainer.style.width = "100vw";
+            videoContainer.style.height = "100vh";
+            videoContainer.style.zIndex = "9999";
+            document.body.style.overflow = "hidden";
+            resizeIframe(iframe);
+        }
+
+        function exitFallbackFullscreen() {
+            videoContainer.classList.remove("fullscreen-active");
+            videoContainer.style.position = "relative";
+            videoContainer.style.top = "";
+            videoContainer.style.left = "";
+            videoContainer.style.width = "";
+            videoContainer.style.height = "";
+            videoContainer.style.zIndex = "";
+            document.body.style.overflow = "";
+            resizeIframe(iframe);
+        }
+
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                videoContainer.requestFullscreen().catch((err) => {
-                    console.error(`Error al activar pantalla completa: ${err.message}`);
-                });
-            } else {
+            if (videoContainer.classList.contains("fullscreen-active")) {
+                exitFallbackFullscreen();
+                return;
+            }
+
+            if (document.fullscreenElement) {
                 document.exitFullscreen().catch((err) => {
                     console.error(`Error al salir de pantalla completa: ${err.message}`);
                 });
+                return;
+            }
+
+            // En iOS Safari la promesa de requestFullscreen puede quedarse colgada
+            // sin resolverse ni rechazarse nunca, así que además de escuchar el
+            // resultado, comprobamos con un timeout si realmente entró en fullscreen.
+            let settled = false;
+            const fallbackTimer = setTimeout(() => {
+                if (!settled && !document.fullscreenElement) {
+                    settled = true;
+                    enterFallbackFullscreen();
+                }
+            }, 300);
+
+            try {
+                const request = videoContainer.requestFullscreen?.();
+                if (!request) {
+                    clearTimeout(fallbackTimer);
+                    enterFallbackFullscreen();
+                    return;
+                }
+                request
+                    .then(() => {
+                        settled = true;
+                        clearTimeout(fallbackTimer);
+                    })
+                    .catch(() => {
+                        if (settled) return;
+                        settled = true;
+                        clearTimeout(fallbackTimer);
+                        enterFallbackFullscreen();
+                    });
+            } catch (err) {
+                settled = true;
+                clearTimeout(fallbackTimer);
+                enterFallbackFullscreen();
             }
         }
 

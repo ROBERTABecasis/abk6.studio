@@ -201,6 +201,12 @@ function createCanvasInstance() {
     }
 
     canvasActive = true;
+
+    // Bloquear el scroll de la página mientras el juguete está activo,
+    // para que lo único que se pueda hacer sea arrastrar los elementos.
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", preventScrollWhileActive, { passive: false });
 }
 
 function destroyCanvasInstance() {
@@ -214,6 +220,14 @@ function destroyCanvasInstance() {
     canvas = null;
     circles = [];
     canvasActive = false;
+
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    document.removeEventListener("touchmove", preventScrollWhileActive, { passive: false });
+}
+
+function preventScrollWhileActive(event) {
+    if (canvasActive) event.preventDefault();
 }
 
 function setup() {

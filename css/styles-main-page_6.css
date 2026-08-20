@@ -13,12 +13,18 @@
   src: url('../fonts/PPNeueBit-Bold.otf') format('opentype');
 }
 
+    html {
+      overflow-x: hidden;
+      width: 100%;
+    }
+
     body {
       margin: 0px;
-      font-family: 'Helvetica Now Display Bold';  
+      font-family: 'Helvetica Now Display Bold';
       letter-spacing: .5px;
       background-color: #F5F4E5;
       overflow-x: hidden;
+      width: 100%;
     }
 
     .header {
@@ -693,6 +699,9 @@
     align-items: center;
     border-top: 1px solid #000000;
     position: relative;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
     bottom: 0;
 }
 
@@ -745,8 +754,9 @@
             display: flex;
             justify-content: center;
             width: 100%;
+            max-width: 100vw;
             overflow: hidden;
-           
+
         }
         .bottom-footer span {
             font-size: 18px;
@@ -802,6 +812,8 @@
     padding: 20px 0;
     white-space: nowrap;
     position: relative;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .scroll-container {
@@ -1184,6 +1196,39 @@ canvas {
 .main-video-casestudy:hover .progress-container .progress-bar {
     opacity: 1;
     visibility: visible;
+}
+
+/* En touch (mobile) no existeix :hover, así que mostramos los controles siempre */
+@media (hover: none) {
+    .main-video .custom-button,
+    .main-video .sound-button,
+    .main-video .fullscreen-button,
+    .main-video .progress-container,
+    .video-container .custom-button,
+    .video-container .sound-button,
+    .video-container .fullscreen-button,
+    .video-container .progress-container,
+    .main-video-casestudy .custom-button,
+    .main-video-casestudy .sound-button,
+    .main-video-casestudy .fullscreen-button,
+    .main-video-casestudy .progress-container {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Fallback de pantalla completa para navegadores (iOS Safari) sin Fullscreen API */
+.main-video.fullscreen-active,
+.main-video-casestudy.fullscreen-active,
+.video-container.fullscreen-active {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    z-index: 9999;
+    background: #000;
 }
 
 .custom-image {
