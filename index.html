@@ -6,6 +6,21 @@
   <title>ABK6 STUDIO</title>
   <link rel="stylesheet" href="css/styles-main-page_6.css">
   <link rel="icon" href="icon_web.png" type="image/png">
+  <style>
+    /* Canvas de Rive dentro de las tarjetas del grid: sobrescribimos
+       la regla global "canvas { position: fixed !important; ... }"
+       (que era solo para el juguete p5.js) y encaja al frame como la
+       imagen que reemplazaba. */
+    .rive-thumb-canvas {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+    }
+  </style>
 </head>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 <body>
@@ -180,7 +195,9 @@
   </div>
     </div>
     <div class="main-caption">
-      <h3>Telling stories from the wild and from the heart</h3>
+      <h1>Motion Designer for Interactive Products</h1>
+      <p>2D &amp; 3D character animation, motion systems, and Rive-powered
+         interactions for apps and games.</p>
     </div>
   </div>
 
@@ -199,6 +216,17 @@
         <div class="caption_one">animade</div>
         <div class="caption">BBC x Hitachi</div>
         <div class="caption_two">3D</div>
+      </div>
+    </div>
+    <div class="grid-item" data-category="2D">
+      <a href="casestudy-onboarding.html"><div id="my-video" class="video-container">
+        <!-- Rive interactivo en vez de la imagen (que se veía pixelada) -->
+        <canvas class="rive-thumb-canvas" data-rive-src="new website/onboarding/welcome_screen_final.riv" data-rive-artboard="Master final" data-rive-sm="State Machine 1"></canvas>
+      </div></a>
+      <div class="text-container">
+        <div class="caption_one">Macadam</div>
+        <div class="caption">Onboarding</div>
+        <div class="caption_two">2D</div>
       </div>
     </div>
     <!-- Repeat the grid-item structure for all your items, changing content as needed -->
@@ -593,6 +621,48 @@
  <script src="js/main-page/main-page-scripts_6.js" defer></script>
  <script src="js/main-page/main-page-filter_3.js" defer></script> 
 
+
+
+
+  <!-- Rive runtime + loader para canvas .rive-thumb-canvas en las tarjetas -->
+  <script src="https://unpkg.com/@rive-app/canvas@latest"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (typeof rive === 'undefined') return;
+      document.querySelectorAll('.rive-thumb-canvas').forEach(canvas => {
+        const src = canvas.getAttribute('data-rive-src');
+        const artboard = canvas.getAttribute('data-rive-artboard') || undefined;
+        const sm = canvas.getAttribute('data-rive-sm') || undefined;
+        if (!src) return;
+        const r = new rive.Rive({
+          src, canvas, artboard, stateMachines: sm,
+          autoBind: true,
+          /* Autoplay a false: solo se reproduce mientras el usuario tenga
+             el ratón encima de la tarjeta (mouseenter/mouseleave abajo).
+             Al cargar mostramos el primer frame y pausamos. */
+          autoplay: false,
+          layout: new rive.Layout({ fit: rive.Fit.Contain, alignment: rive.Alignment.Center }),
+          onLoad: () => {
+            r.resizeDrawingSurfaceToCanvas();
+            // Un tick de la State Machine para que se vea el primer frame
+            // congelado en la miniatura, sin dejarla en negro.
+            if (sm) { r.play(sm); r.pause(sm); }
+          },
+        });
+        window.addEventListener('resize', () => r.resizeDrawingSurfaceToCanvas());
+
+        // Hover en la tarjeta = reproduce; salir = pausa. En touch (móvil)
+        // no hay hover, así que el mouseenter no se dispara nunca: para
+        // esos casos empezamos a reproducir al hacer scroll y estar
+        // visible, como haces con los vídeos de las otras tarjetas.
+        const gridItem = canvas.closest('.grid-item');
+        if (gridItem) {
+          gridItem.addEventListener('mouseenter', () => { if (sm) r.play(sm); });
+          gridItem.addEventListener('mouseleave', () => { if (sm) r.pause(sm); });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

@@ -399,6 +399,28 @@
   margin: 0;
 }
 
+/* Encabezado del reel: h1 grande + párrafo pequeño de aclaración. */
+.main-caption h1 {
+  font-size: 46px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 0 0 28px; /* algo más de aire entre título y párrafo */
+}
+.main-caption p {
+  font-size: 15px;
+  line-height: 1.35;
+  margin: 0;
+  font-family: 'Helvetica Now Display Medium', sans-serif;
+}
+@media (max-width: 1200px) {
+  .main-caption h1 { font-size: 36px; margin-bottom: 24px; }
+  .main-caption p { font-size: 14px; }
+}
+@media (max-width: 768px) {
+  .main-caption h1 { font-size: 22px; margin-bottom: 20px; }
+  .main-caption p { font-size: 13px; }
+}
+
 /* Responsividad */
 @media (max-width: 1200px) {
   .main-caption h3 {
@@ -440,12 +462,11 @@
   }
 
   .main-caption {
-    width: 70%; /* El texto ocupa todo el ancho */
-    text-align: center; /* Centra el texto */
-    
-    height: 40%;
-    padding: 10px; /* Reduce el padding para móviles */
-   
+    width: 95%; /* Casi todo el ancho: antes 70% dejaba mucho margen lateral */
+    text-align: center;
+    height: auto;
+    padding: 10px 6px;
+    box-sizing: border-box;
   }
 
   .main-caption h3 {
@@ -528,6 +549,15 @@
   margin-right: 20px;
   margin-left: 20px;
   padding-bottom: 10px;
+  /* El contenedor no debe interceptar clicks: solo los enlaces internos
+     (.previous y .next) lo hacen. Antes tapaba el ancho completo de la
+     pantalla e impedía clicar en el reproductor, botones u outfit picker. */
+  pointer-events: none;
+}
+
+.floating-nav .previous,
+.floating-nav .next {
+  pointer-events: auto;
 }
 
 .floating-nav .next {
@@ -1156,10 +1186,11 @@ canvas {
       } */
 
       .main-caption {
-        width: 60%; /* El texto ocupa todo el ancho */
-        text-align: center; /* Centra el texto */
-        height: 20%;
-        padding: 10px; /* Reduce el padding para móviles */
+        width: 95%; /* Casi todo el ancho en mobile — antes 60% dejaba mucho aire lateral */
+        text-align: center;
+        height: auto;
+        padding: 10px 6px;
+        box-sizing: border-box;
       }
 
       .main-caption h3 {
@@ -1405,10 +1436,12 @@ canvas {
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column; /* Cambia el layout a una columna */
-    height: auto; /* Ajusta la altura automáticamente */
-    gap: 10px; /* Espacio entre las divisiones apiladas */
+    /* Antes había un height: 100vh que dejaba un buffer enorme entre
+       los créditos y el footer/floating-nav en móvil. Con height: auto
+       la sección se ajusta al contenido. */
+    height: auto;
+    gap: 10px;
     padding: 30px;
-    height: 100vh;
   }
 
   .info-container, .credits-container {
