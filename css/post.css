@@ -1,0 +1,308 @@
+/* Extras for post-infinite-stairs.html, on top of styles-main-page_6.css.
+   Layout spread across the full width like the Macadam onboarding case study,
+   with the carousel's details: big headings, orange pixel words, stickers, the face and its bubbles. */
+
+/* known bug 7.1: the invisible previous/next bar must not eat clicks */
+.floating-nav { pointer-events: none !important; }
+.floating-nav .previous,
+.floating-nav .next { pointer-events: auto !important; }
+
+/* ---------- player ---------- */
+.main-video-casestudy.post-player {
+  position: relative;
+  width: 100%;
+  margin-top: 0;
+  border: 2.5px solid #000;
+  background: #000;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.post-player video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* first video: everything outside the hand-drawn frame is cut away, so the page colour shows through */
+.main-video-casestudy.post-player.post-hero { border: 0; background: transparent; }
+.post-hero video {
+  -webkit-mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
+  mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
+}
+
+/* ---------- full-width sections ---------- */
+.is-hero,
+.is-step,
+.is-cta {
+  position: relative;
+  box-sizing: border-box;
+  padding: 40px 40px 20px;
+}
+
+.is-hero { display: grid; grid-template-columns: minmax(0, 620px) 1fr; gap: 60px; align-items: start; padding-top: 24px; }
+.is-game { position: relative; min-width: 0; }
+.is-hero-text { min-width: 0; }
+.is-logo { display: block; width: min(320px, 62%); height: auto; margin: 0 0 20px; }
+.is-hero .is-lede { max-width: none; }
+
+.is-step { display: grid; grid-template-columns: 1fr minmax(0, 52%); gap: 60px; align-items: center; }
+.is-step.reverse { grid-template-columns: minmax(0, 52%) 1fr; }
+.is-step.reverse .is-text { order: 2; }
+
+.is-hero h1,
+.is-step h2,
+.is-cta h2 {
+  margin: 0;
+  font-weight: 400;
+  line-height: .98;
+  letter-spacing: -.03em;
+}
+.is-hero h1 { font-size: clamp(44px, 7vw, 124px); }
+.is-step h2 { font-size: clamp(40px, 6vw, 104px); }
+.is-cta h2 { font-size: clamp(48px, 9vw, 132px); }
+
+.hl {
+  font-family: 'PP NeueBit', monospace;
+  font-size: 1.38em;
+  line-height: .7;
+  letter-spacing: 0;
+  color: #E45515;
+  font-weight: 400;
+}
+
+.is-lede,
+.is-cap {
+  margin: 20px 0 0;
+  font-family: 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif;
+  font-size: clamp(22px, 2.4vw, 40px);
+  line-height: 1.1;
+  letter-spacing: 0;
+  max-width: 24ch;
+}
+
+.is-media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  border: 2.5px solid #000;
+  box-sizing: border-box;
+}
+.is-media.is-square { max-width: 620px; }
+
+/* blocks made of several clips, as in the carousel */
+.is-duo { display: grid; grid-template-columns: 1fr 1fr; }
+.is-duo .post-player + .post-player { margin-left: -2.5px; width: calc(100% + 2.5px); }
+.is-animate { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.is-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+
+/* concept styles: 2x2 images in the frame, the face hanging off the bottom-right corner */
+.is-media-wrap { position: relative; margin-bottom: 44px; }
+.is-media.is-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2.5px; }
+.is-media.is-grid img { display: block; width: 100%; height: 100%; object-fit: cover; min-width: 0; min-height: 0; }
+.is-face-wrap.concept-face { position: absolute; right: -34px; bottom: -52px; width: clamp(88px, 10vw, 140px); }
+.concept-face .bubble {
+  right: 40%;
+  bottom: 90%;
+  margin: 0;
+  padding: 6px 16px;
+  font-size: clamp(20px, 2.2vw, 30px);
+  letter-spacing: 2px;
+  filter: none;
+  z-index: 3;
+}
+.concept-face .bubble::after { right: 14px; bottom: -9px; }
+
+/* final cast: transparent layers on the page colour, kept near the PNGs' real size so they stay sharp */
+.is-cast { position: relative; width: 100%; max-width: 1000px; }
+.is-cast img { position: absolute; display: block; height: auto; }
+
+.sticker {
+  position: absolute;
+  width: clamp(64px, 8vw, 130px);
+  height: auto;
+  transform: rotate(var(--r, 0deg));
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* the drawn face + speech bubble */
+.is-face-wrap { position: relative; width: clamp(104px, 12vw, 160px); }
+.is-face {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform: rotate(10deg);
+  filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff);
+}
+/* same idea as concept styles: the face hangs off the game's corner, talking outside the frame */
+.is-face-wrap.hero-face { position: absolute; right: -44px; bottom: -28px; z-index: 12; }
+/* the face covers the player's bottom-right corner, so fullscreen sits next to play */
+.post-hero .fullscreen-button { right: auto; left: 72px; }
+.hero-face .bubble { right: auto; left: 100%; bottom: 14%; margin: 0 0 0 10px; transform-origin: 0 100%; }
+.hero-face .bubble::after { right: auto; left: -9px; bottom: 16px; transform: rotate(135deg); }
+
+.bubble {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 12px 26px 12px 22px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 40px;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.1;
+  letter-spacing: -.5px;
+  white-space: nowrap;
+  filter: drop-shadow(5px 5px 0 #000);
+}
+.bubble::after {
+  content: '';
+  position: absolute;
+  right: 26px;
+  bottom: -10px;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  transform: rotate(45deg);
+}
+.bubble .type { display: block; }
+.bubble-two .t2 { margin-left: 8px; }
+
+/* the last face blinks and winks, as on the carousel's final slide: extra layers over the drawing */
+div.is-face { position: relative; }
+div.is-face img { display: block; width: 100%; height: auto; }
+div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
+
+/* call to action */
+.is-cta { padding-bottom: 24px; }
+.cta-face { position: absolute; right: 40px; bottom: 24px; }
+.cta-face .bubble { right: 100%; bottom: 36%; margin: 0 12px 0 0; }
+
+.play-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  margin-top: 28px;
+  padding: 0 32px;
+  background: #fff;
+  color: #1C140A;
+  border: 2.5px solid #000;
+  border-radius: 40px;
+  font-size: 28px;
+  letter-spacing: -.5px;
+  text-decoration: none;
+}
+.play-link:hover,
+.play-link:focus-visible { background: #1C140A; color: #F5F4E5; outline: none; }
+.play-link:focus-visible { box-shadow: 0 0 0 4px #E45515; }
+
+.post-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
+.post-link:hover { color: #E45515; }
+
+/* motion: only when the visitor is fine with it (carousel's stepped, hand-made feel) */
+@media (prefers-reduced-motion: no-preference) {
+  .is-face { animation: faceJitter 2s steps(1, end) infinite; }
+  .bubble { animation: bubPop 6s steps(1, end) infinite; transform-origin: 85% 100%; }
+  .bubble .type { animation: typeIn 6s steps(1, end) infinite; }
+  .bubble-two .t2 { animation-name: typeInLate; }
+  .eyes.blink { animation: blink 4s steps(1, end) infinite; }
+  .eyes.wink { animation: wink 7s steps(1, end) infinite; }
+  /* hero: "hey!" then "I've made a game!", like the cover */
+  .bub-a { animation: bubA 9s steps(1, end) infinite; }
+  .bub-a .type { animation: none; }
+  .bub-b { animation: bubB 9s steps(1, end) infinite; }
+  .bub-b .type { animation: typeB 9s steps(1, end) infinite; }
+}
+@keyframes blink {
+  0%, 58%  { opacity: 0; }
+  59%, 66% { opacity: 1; }
+  67%, 100%{ opacity: 0; }
+}
+@keyframes wink {
+  0%, 44%  { opacity: 0; }
+  45%, 51% { opacity: 1; }
+  52%, 100%{ opacity: 0; }
+}
+@keyframes bubA {
+  0%, 4%   { opacity: 0; transform: scale(.4); }
+  5%       { opacity: 1; transform: scale(1.12); }
+  7%, 34%  { opacity: 1; transform: scale(1); }
+  35%, 100%{ opacity: 0; transform: scale(.4); }
+}
+@keyframes bubB {
+  0%, 38%  { opacity: 0; transform: scale(.4); }
+  39%      { opacity: 1; transform: scale(1.12); }
+  41%, 94% { opacity: 1; transform: scale(1); }
+  96%, 100%{ opacity: 0; transform: scale(.4); }
+}
+@keyframes typeB {
+  0%, 41%  { clip-path: inset(0 100% 0 0); }
+  44%      { clip-path: inset(0 75% 0 0); }
+  47%      { clip-path: inset(0 50% 0 0); }
+  50%      { clip-path: inset(0 25% 0 0); }
+  52%, 100%{ clip-path: inset(0 0 0 0); }
+}
+@keyframes faceJitter {
+  0%   { transform: rotate(10deg) translate(0, 0); }
+  17%  { transform: rotate(6deg) translate(-4px, 3px); }
+  33%  { transform: rotate(13deg) translate(3px, -3px); }
+  50%  { transform: rotate(8deg) translate(-2px, -4px); }
+  67%  { transform: rotate(12deg) translate(4px, 2px); }
+  83%  { transform: rotate(5deg) translate(-3px, -1px); }
+  100% { transform: rotate(10deg) translate(0, 0); }
+}
+@keyframes bubPop {
+  0%, 4%   { opacity: 0; transform: scale(.4); }
+  5%       { opacity: 1; transform: scale(1.1); }
+  7%, 92%  { opacity: 1; transform: scale(1); }
+  96%, 100%{ opacity: 0; transform: scale(.4); }
+}
+@keyframes typeIn {
+  0%, 7%   { clip-path: inset(0 100% 0 0); }
+  10%      { clip-path: inset(0 75% 0 0); }
+  13%      { clip-path: inset(0 50% 0 0); }
+  16%      { clip-path: inset(0 25% 0 0); }
+  19%, 100%{ clip-path: inset(0 0 0 0); }
+}
+@keyframes typeInLate {
+  0%, 25%  { clip-path: inset(0 100% 0 0); }
+  28%      { clip-path: inset(0 75% 0 0); }
+  31%      { clip-path: inset(0 50% 0 0); }
+  34%      { clip-path: inset(0 25% 0 0); }
+  37%, 100%{ clip-path: inset(0 0 0 0); }
+}
+
+@media (max-width: 768px) {
+  .is-hero,
+  .is-step,
+  .is-step.reverse { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 20px; }
+  .is-step.reverse .is-text { order: 0; }
+  .is-cta { padding-left: 20px; padding-right: 20px; }
+  .is-face-wrap.hero-face { right: -6px; bottom: -24px; }
+  .hero-face .bubble { left: auto; right: 0; bottom: 100%; margin: 0 0 8px; transform-origin: 85% 100%; }
+  .hero-face .bubble::after { left: auto; right: 26px; bottom: -10px; transform: rotate(45deg); }
+  .is-logo { width: min(280px, 70%); margin: 0 auto 20px; }
+  .is-face-wrap.concept-face { right: -6px; bottom: -40px; }
+  .is-media.is-square { max-width: none; }
+  /* the three small loops are too narrow for both buttons */
+  .is-tiles { gap: 8px; }
+  .is-tiles .fullscreen-button { display: none; }
+  .is-tiles .custom-button { left: 8px; bottom: 6px; width: 28px; height: 28px; }
+  /* on a phone the heading fills the width: stickers go to the media corner instead of over the text */
+  .sticker { left: auto !important; top: auto !important; right: 8px !important; bottom: 26px !important; width: 60px; }
+  .is-media-wrap ~ .sticker { display: none; }
+  .cta-face { position: relative; right: auto; bottom: auto; margin: 96px 0 0 auto; }
+  .cta-face .bubble { right: 0; bottom: 100%; margin: 0 0 10px; }
+}
