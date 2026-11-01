@@ -1,0 +1,22 @@
+/* Square-only version of the game for the case study page. main.js and style.css stay as they
+   are on the public site: to update the game, copy them, assets/ and vendor/ over this folder. */
+html, body { height: 100%; overflow: hidden; }
+body { min-height: 0; }
+
+html .app {
+  --frame: min(100vw, 100vh);
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  gap: 0;
+}
+
+/* music and sounds are driven from the page beside the game */
+.logo-wrap,
+.help,
+.sound,
+.pad,
+.pad.only-touch { display: none !important; }
+
+html .stage { display: block !important; width: auto; }
+

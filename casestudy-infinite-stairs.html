@@ -6,7 +6,7 @@
   <title>Infinite Stairs</title>
   <meta name="description" content="How I made Infinite Stairs in a week for the Rive x Contra Halloween challenge: doodles, a 3D base, hand-traced vectors, rigging and animation in Rive.">
   <link rel="stylesheet" href="css/styles-main-page_6.css">
-  <link rel="stylesheet" href="css/post.css?v=24">
+  <link rel="stylesheet" href="css/post.css?v=27">
   <link rel="icon" href="icon_web.png" type="image/png">
   
 </head>
@@ -102,8 +102,20 @@
                 <path d="M3.67578 2.25977H2.17578L2.17578 3.75977V8.84589V10.3459L2.17579 17.7466L2.17579 19.2466H3.67579H8.76191H10.2619V17.7466L10.2619 10.3459H17.6626H19.1626V8.84589V3.75977V2.25977H17.6626H10.2619H8.76191H3.67578ZM52.3283 3.75977V2.25977L50.8283 2.25977L45.7422 2.25977L44.2422 2.25977L36.8415 2.25977L35.3415 2.25977V3.75977V8.84589V10.3459H36.8415L44.2422 10.3459V17.7466V19.2466H45.7422H50.8283H52.3283V17.7466V10.3459V8.8459V3.75977ZM50.8283 41.2866H52.3283V39.7866V34.7005V33.2005L52.3283 25.7997V24.2997H50.8283H45.7422H44.2422V25.7997V33.2005L36.8415 33.2005H35.3415V34.7005V39.7866V41.2866H36.8415H44.2422H45.7422H50.8283ZM2.17578 39.7866V41.2866H3.67578H8.7619H10.2619L17.6626 41.2866H19.1626V39.7866L19.1626 34.7005V33.2005H17.6626L10.2619 33.2005L10.2619 25.7997V24.2997H8.76191H3.67578H2.17578L2.17578 25.7997L2.17578 33.2005V34.7005V39.7866Z" fill="#F5F4E5" stroke="black" stroke-width="3"/>
             </svg>
         </div>
+      <button class="play-link is-play-game" type="button" data-game="new website/infinite-stairs/game/index.html">play the game</button>
     </div>
-    <img class="is-logo" src="new website/infinite-stairs/logo-infinite-stairs-outline.png" alt="Infinite Stairs logo">
+    <div class="is-side">
+      <img class="is-logo" src="new website/infinite-stairs/logo-infinite-stairs-outline.png" alt="Infinite Stairs logo">
+      <div class="is-game-help" hidden>
+        <p class="keys-mouse">&uarr; jump &nbsp; &darr; duck &nbsp; &rarr; attack &nbsp; esc pause</p>
+        <p class="keys-touch">swipe up to jump, swipe down to duck, tap to attack</p>
+        <div class="is-sound-row">
+          <button class="is-sound" type="button" data-target="musicBtn" data-label="music">music on</button>
+          <button class="is-sound" type="button" data-target="sfxBtn" data-label="sounds">sounds on</button>
+        </div>
+        <button class="play-link is-close-game" type="button">back to the video</button>
+      </div>
+    </div>
   </div>
 
   <section class="is-hero">
@@ -167,7 +179,7 @@
             </svg>
         </div>
     </div>
-    <img class="sticker" src="new website/infinite-stairs/st-flower.png" alt="" aria-hidden="true" style="--r: -13deg; right: 8px; bottom: 0">
+    <img class="sticker" src="new website/infinite-stairs/st-flower.png" alt="" aria-hidden="true" style="--r: -13deg; right: 8px; bottom: 104px">
   </section>
   <section class="is-step reverse">
     <div class="is-text">
@@ -278,7 +290,7 @@
         </div>
     </div>
     </div>
-    <img class="sticker" src="new website/infinite-stairs/st-yinyang.png" alt="" aria-hidden="true" style="--r: 8deg; right: 3%; bottom: 3%">
+    <img class="sticker" src="new website/infinite-stairs/st-yinyang.png" alt="" aria-hidden="true" style="--r: 8deg; right: 3%; bottom: 104px">
   </section>
   <section class="is-step reverse">
     <div class="is-text">
@@ -907,6 +919,7 @@ Everything you see is hand-drawn: doodled in Procreate, the base built in 3D in 
  <script src="js/main-page/main-page-filter_3.js" defer></script> 
 
 <script src="js/post-player.js?v=5" defer></script>
+<script src="js/post-game.js?v=2" defer></script>
 
 </body>
 </html>

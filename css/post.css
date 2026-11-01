@@ -17,8 +17,8 @@
   overflow: hidden;
   box-sizing: border-box;
 }
-/* one control row, identical on every player: play, fullscreen, then the bar to the far edge,
-   all centred on the same line. Fullscreen stays on the left so stickers on the corner never cover it */
+/* one control row, identical on every player and laid out like the other case studies:
+   play on the left, the bar in the middle, fullscreen on the right, all centred on the same line */
 .post-player .custom-button,
 .post-player .fullscreen-button {
   bottom: 12px;
@@ -30,12 +30,12 @@
   box-sizing: border-box;
 }
 .post-player .custom-button { left: 12px; }
-.post-player .fullscreen-button { left: 60px; right: auto; }
+.post-player .fullscreen-button { left: auto; right: 12px; }
 .post-player .custom-button svg { width: 34px; height: 34px; }
 .post-player .fullscreen-button svg { width: 36px; height: 30px; }
 .post-player .progress-container {
-  left: 112px;
-  right: 12px;
+  left: 64px;
+  right: 64px;
   bottom: 25px;
   width: auto;
   height: 14px;
@@ -62,9 +62,70 @@
   padding: 18px 40px 0;
 }
 .main-video-casestudy.post-player.post-hero { width: var(--game); border: 0; background: transparent; }
-.post-hero video {
+.post-hero video,
+.post-hero iframe {
   -webkit-mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
   mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
+}
+
+/* the real game, swapped in over the video when asked for */
+.is-side { display: grid; gap: 28px; justify-items: center; min-width: 0; text-align: center; }
+.is-play-game {
+  position: absolute;
+  left: 50%;
+  bottom: 72px;
+  margin: 0;
+  transform: translateX(-50%);
+  z-index: 3;
+  font-family: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.is-close-game { margin: 0; font-family: inherit; font-size: 20px; min-height: 44px; padding: 0 24px; cursor: pointer; }
+.post-hero iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #000;
+  z-index: 2;
+}
+.post-hero.is-playing video,
+.post-hero.is-playing .custom-button,
+.post-hero.is-playing .fullscreen-button,
+.post-hero.is-playing .progress-container,
+.post-hero.is-playing .play-pause-overlay,
+.post-hero.is-playing .is-play-game { display: none !important; }
+.is-game-help { display: grid; gap: 18px; justify-items: center; }
+.is-game-help[hidden] { display: none; }
+.is-game-help p {
+  margin: 0;
+  font-family: 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+.keys-touch { display: none; }
+.is-sound-row { display: flex; gap: 28px; justify-content: center; }
+.is-sound {
+  min-height: 44px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: #000;
+  font-family: 'Helvetica Now Display Medium', Helvetica, Arial, sans-serif;
+  font-size: clamp(18px, 1.6vw, 24px);
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+.is-sound:hover,
+.is-sound:focus-visible { color: #E45515; outline: none; }
+@media (hover: none) and (pointer: coarse) {
+  .keys-mouse { display: none; }
+  .keys-touch { display: block; }
 }
 
 /* ---------- full-width sections ---------- */
@@ -240,7 +301,7 @@ div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
   text-decoration: none;
 }
 .play-link:hover,
-.play-link:focus-visible { background: #1C140A; color: #F5F4E5; outline: none; }
+.play-link:focus-visible { background: #000; color: #F5F4E5; outline: none; }
 .play-link:focus-visible { box-shadow: 0 0 0 4px #E45515; }
 
 .post-link { color: inherit; text-decoration: underline; text-underline-offset: 4px; }
@@ -332,13 +393,14 @@ div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
   .is-face-wrap.concept-face { right: -6px; bottom: -40px; }
   /* the three small loops are too narrow for both buttons */
   .is-step .is-media.is-contain { width: 100%; }
+  .is-play-game { bottom: 64px; font-size: 22px; min-height: 48px; padding: 0 24px; }
   .is-tiles { gap: 8px; }
   .is-tiles .fullscreen-button { display: none; }
   .is-tiles .custom-button { left: 6px; bottom: 6px; width: 28px; height: 28px; }
   .is-tiles .custom-button svg { width: 24px; height: 24px; }
   .is-tiles .progress-container { left: 40px; right: 8px; bottom: 13px; height: 14px; }
   /* on a phone the heading fills the width: stickers go to the media corner instead of over the text */
-  .sticker { left: auto !important; top: auto !important; right: 8px !important; bottom: 26px !important; width: 60px; }
+  .sticker { left: auto !important; top: auto !important; right: 8px !important; bottom: 96px !important; width: 60px; }
   .is-media-wrap ~ .sticker { display: none; }
   .cta-face { position: relative; right: auto; bottom: auto; margin: 96px 0 0 auto; }
   .cta-face .bubble { right: 0; bottom: 100%; margin: 0 0 10px; }

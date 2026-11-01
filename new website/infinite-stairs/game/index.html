@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Infinite Stairs</title>
+  <meta name="description" content="Climb an endless spiral staircase. Jump the goblins and spiders, duck the bats, slash the skeletons.">
+  <meta name="theme-color" content="#000000">
+  <link rel="preload" href="assets/fonts/FuturaLT-Heavy.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="embed.css?v=2">
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <main class="app" id="app" data-state="loading">
+
+    <h1 class="logo-wrap">
+      <canvas id="logo" class="logo" aria-hidden="true"></canvas>
+      <span class="sr-only">Infinite Stairs</span>
+    </h1>
+
+    <section class="stage" aria-label="Game">
+      <div class="frame" id="frame">
+        <canvas id="game" class="game" tabindex="0" aria-label="Infinite Stairs game. Arrow keys to play."></canvas>
+        <canvas id="marc" class="marc" aria-hidden="true"></canvas>
+        <div class="loader" id="loader" role="status">
+          <span class="loader-title">Lighting the torches</span>
+          <span class="loader-bar"><i id="loaderBar"></i></span>
+          <span class="loader-pct" id="loaderPct">0%</span>
+        </div>
+      </div>
+
+      <div class="pad only-touch" id="pad">
+        <button class="pad-btn" data-action="jump" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 4 14h5v6h6v-6h5z"/></svg>
+          <span>Jump</span>
+        </button>
+        <button class="pad-btn" data-action="crouch" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 20 8-10h-5V4H9v6H4z"/></svg>
+          <span>Duck</span>
+        </button>
+        <button class="pad-btn pad-attack" data-action="attack" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 17.5 3 6V3h3l11.5 11.5"/><path d="m13 19 6-6"/><path d="m16 16 4 4"/><path d="m19 21 2-2"/></svg>
+          <span>Attack</span>
+        </button>
+        <button class="pad-btn pad-pause" data-action="pause" type="button" aria-label="Pause">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <details class="help" id="help">
+      <summary>How to play</summary>
+      <p class="only-mouse">↑ W Space: jump &nbsp;·&nbsp; ↓ S: duck &nbsp;·&nbsp; → D J: attack &nbsp;·&nbsp; Esc: pause &nbsp;·&nbsp; Enter: start</p>
+      <p class="only-touch">Swipe up: jump &nbsp;·&nbsp; swipe down: duck &nbsp;·&nbsp; tap: attack</p>
+    </details>
+
+    <div class="sound" role="group" aria-label="Settings">
+      <button class="plain" id="musicBtn" type="button" aria-pressed="true">Music <b data-on>on</b><b data-off>off</b></button>
+      <button class="plain" id="sfxBtn" type="button" aria-pressed="true">Sounds <b data-on>on</b><b data-off>off</b></button>
+    </div>
+  </main>
+
+  <noscript><p class="noscript">Infinite Stairs needs JavaScript and WebGL 2.</p></noscript>
+
+  <audio id="music" src="assets/music.mp3" loop preload="none"></audio>
+  <script src="vendor/rive.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+@font-face {
+  font-family: "Futura LT";
+  src: url("assets/fonts/FuturaLT-Book.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Futura LT";
+  src: url("assets/fonts/FuturaLT-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Futura LT";
+  src: url("assets/fonts/FuturaLT-Heavy.ttf") format("truetype");
+  font-weight: 900;
+  font-display: swap;
+}
+
+:root {
+  --white: #ffffff;
+  --ink: #000000;
+  --red: #f20d0d; /* the red of the game's column */
+  --soft: #b3b3b3;
+  --wobble: 16px 24px 12px 26px / 26px 12px 22px 16px;
+  --wobble-2: 24px 12px 22px 14px / 12px 22px 14px 24px;
+  --text: "Futura LT", "Futura", "Trebuchet MS", sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  min-height: 100svh;
+  background: var(--ink);
+  color: var(--white);
+  font-family: var(--text);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+button { font: inherit; color: inherit; }
+
+/* ───────────── Layout: logo, game, a line of text ───────────── */
+
+.app {
+  --frame: min(calc(100vw - 32px), 760px, calc(100svh - 250px));
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: max(14px, env(safe-area-inset-top)) 16px max(18px, env(safe-area-inset-bottom));
+}
+
+.logo-wrap {
+  margin: 0;
+  width: min(46.2vw, 200px);
+  aspect-ratio: 540 / 280;
+  line-height: 0;
+  flex: none;
+}
+/* The logo's white letters turn black and its outline white; the flame keeps its red. */
+.logo { width: 100%; height: 100%; display: block; filter: invert(1) hue-rotate(180deg); }
+
+.stage { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+/* ───────────── The frame and the game inside it ───────────── */
+
+.frame {
+  position: relative;
+  width: var(--frame);
+  aspect-ratio: 900 / 902;
+  flex: none;
+}
+
+/* The game square sits in the opening of the drawn frame, a little under its edges. */
+.game,
+.loader {
+  position: absolute;
+  left: 6.05%;
+  top: 4.35%;
+  width: 88.5%;
+  height: 88.3%;
+}
+
+.game {
+  display: block;
+  background: var(--ink);
+  outline: none;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.marc {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.7));
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--ink);
+  color: var(--white);
+  text-align: center;
+  transition: opacity 0.5s ease;
+}
+.app:not([data-state="loading"]) .loader { opacity: 0; pointer-events: none; }
+.loader-title { font-weight: 700; font-size: clamp(16px, 3vw, 22px); }
+.loader-bar {
+  width: 52%;
+  height: 12px;
+  border: 2px solid var(--white);
+  border-radius: 8px 10px 7px 11px;
+  overflow: hidden;
+}
+.loader-bar i { display: block; height: 100%; width: 0; background: var(--red); transition: width 0.2s; }
+.loader-pct { font-weight: 700; font-size: 13px; letter-spacing: 0.12em; opacity: 0.8; }
+.app[data-state="error"] .loader-bar,
+.app[data-state="error"] .loader-pct { display: none; }
+
+/* ───────────── How to play: just text ───────────── */
+
+.help { text-align: center; }
+.help summary {
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+.help summary::-webkit-details-marker { display: none; }
+.help summary:hover { color: var(--red); }
+.help summary:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
+.help p { margin: 8px 0 0; font-size: 14px; color: var(--soft); }
+
+.only-touch { display: none; }
+
+/* ───────────── Music and sounds: just text ───────────── */
+
+.sound { display: flex; gap: 18px; justify-content: center; }
+
+.plain {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--soft);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+.plain b { font-weight: 900; color: var(--white); }
+.plain[aria-pressed="true"] b[data-off],
+.plain[aria-pressed="false"] b[data-on] { display: none; }
+.plain:hover { color: var(--white); }
+.plain:focus-visible, .pad-btn:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+.noscript { text-align: center; font-weight: 700; }
+
+/* ───────────── On-screen buttons (touch) ───────────── */
+
+.pad {
+  display: none;
+  width: var(--frame);
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 10px;
+}
+
+.pad-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 70px;
+  padding: 8px 6px;
+  background: var(--white);
+  color: var(--ink);
+  border: none;
+  border-radius: var(--wobble);
+  box-shadow: inset 0 0 0 2px var(--white), inset 0 0 0 4px var(--ink);
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+  transition: transform 0.06s, background 0.06s;
+}
+.pad-btn:nth-child(2) { border-radius: var(--wobble-2); }
+.pad-btn svg { width: 28px; height: 28px; fill: currentColor; stroke: none; }
+.pad-attack svg { fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.pad-pause { min-width: 54px; }
+.pad-pause svg { fill: none; stroke: currentColor; stroke-width: 3.2; stroke-linecap: round; }
+.pad-btn.is-down, .pad-btn:active { background: var(--red); color: var(--white); box-shadow: none; transform: translateY(2px); }
+
+@media (hover: none) and (pointer: coarse) {
+  .pad.only-touch { display: grid; }
+  .only-mouse { display: none; }
+  .only-touch { display: block; }
+  .app { --frame: min(calc(100vw - 32px), 640px, calc(100svh - 350px)); }
+}
+
+/* Phone on its side: buttons either side of the tower, like a gamepad. */
+@media (hover: none) and (pointer: coarse) and (orientation: landscape) and (max-height: 600px) {
+  .app { --frame: calc(100svh - 24px); padding-top: 12px; }
+  .logo-wrap { display: none; }
+  .stage {
+    display: grid;
+    grid-template-columns: 1fr var(--frame) 1fr;
+    grid-template-areas: "left frame right";
+    align-items: center;
+    width: 100%;
+    gap: 16px;
+  }
+  .frame { grid-area: frame; }
+  .pad.only-touch { display: contents; }
+  .pad-btn { min-height: 0; height: 26svh; min-width: 0; width: 100%; max-width: 160px; }
+  .pad-btn[data-action="jump"] { grid-area: left; align-self: start; justify-self: center; margin-top: 8svh; }
+  .pad-btn[data-action="crouch"] { grid-area: left; align-self: end; justify-self: center; margin-bottom: 8svh; }
+  .pad-btn[data-action="attack"] { grid-area: right; align-self: start; justify-self: center; margin-top: 8svh; height: 40svh; }
+  .pad-btn[data-action="pause"] { grid-area: right; align-self: end; justify-self: center; height: 56px; width: 56px; margin-bottom: 8svh; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader, .pad-btn { transition: none; }
+}
