@@ -17,6 +17,30 @@
   overflow: hidden;
   box-sizing: border-box;
 }
+/* one control row, identical on every player: play, fullscreen, then the bar to the far edge,
+   all centred on the same line. Fullscreen stays on the left so stickers on the corner never cover it */
+.post-player .custom-button,
+.post-player .fullscreen-button {
+  bottom: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.post-player .custom-button { left: 12px; }
+.post-player .fullscreen-button { left: 60px; right: auto; }
+.post-player .custom-button svg { width: 34px; height: 34px; }
+.post-player .fullscreen-button svg { width: 36px; height: 30px; }
+.post-player .progress-container {
+  left: 112px;
+  right: 12px;
+  bottom: 25px;
+  width: auto;
+  height: 14px;
+  box-sizing: border-box;
+}
 .post-player video {
   position: absolute;
   top: 0;
@@ -27,8 +51,17 @@
   display: block;
 }
 
-/* first video: everything outside the hand-drawn frame is cut away, so the page colour shows through */
-.main-video-casestudy.post-player.post-hero { border: 0; background: transparent; }
+/* first video: as big as fits, logo beside it. The mask cuts everything outside the hand-drawn
+   frame so the page colour shows through; the player is exactly the size of the capture */
+.is-fullhero {
+  --game: min(calc(100vh - 170px), 62vw);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 60px;
+  align-items: center;
+  padding: 18px 40px 0;
+}
+.main-video-casestudy.post-player.post-hero { width: var(--game); border: 0; background: transparent; }
 .post-hero video {
   -webkit-mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
   mask: url("../new website/infinite-stairs/gameplay-mask.png") center / 100% 100% no-repeat;
@@ -43,10 +76,9 @@
   padding: 40px 40px 20px;
 }
 
-.is-hero { display: grid; grid-template-columns: minmax(0, 620px) 1fr; gap: 60px; align-items: start; padding-top: 24px; }
-.is-game { position: relative; min-width: 0; }
+.is-hero { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: end; padding-top: 48px; }
 .is-hero-text { min-width: 0; }
-.is-logo { display: block; width: min(320px, 62%); height: auto; margin: 0 0 20px; }
+.is-logo { display: block; width: min(560px, 82%); height: auto; margin: 0 auto; }
 .is-hero .is-lede { max-width: none; }
 
 .is-step { display: grid; grid-template-columns: 1fr minmax(0, 52%); gap: 60px; align-items: center; }
@@ -92,16 +124,26 @@
   border: 2.5px solid #000;
   box-sizing: border-box;
 }
-.is-media.is-square { max-width: 620px; }
+/* every block is the same box, so the page keeps one rhythm */
+.is-step .is-media,
+.is-duo,
+.is-animate,
+.is-slot { aspect-ratio: 4 / 3 !important; width: 100%; }
+/* iterations is square: same height as the other blocks, no side bars */
+.is-step .is-media.is-contain { aspect-ratio: 1 / 1 !important; width: 75%; }
+.is-slot { display: grid; place-items: center; min-width: 0; }
 
 /* blocks made of several clips, as in the carousel */
-.is-duo { display: grid; grid-template-columns: 1fr 1fr; }
+.is-duo { display: grid; grid-template-columns: 1fr 1fr; min-width: 0; }
+.is-duo .is-media { aspect-ratio: auto !important; height: 100%; min-height: 0; }
 .is-duo .post-player + .post-player { margin-left: -2.5px; width: calc(100% + 2.5px); }
-.is-animate { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.is-animate { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; gap: 12px; min-width: 0; }
+.is-animate > .is-media { aspect-ratio: auto !important; height: 100%; min-height: 0; }
+.is-tiles .is-media { aspect-ratio: 1 / 1 !important; }
 .is-tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 
 /* concept styles: 2x2 images in the frame, the face hanging off the bottom-right corner */
-.is-media-wrap { position: relative; margin-bottom: 44px; }
+.is-media-wrap { position: relative; }
 .is-media.is-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 2.5px; }
 .is-media.is-grid img { display: block; width: 100%; height: 100%; object-fit: cover; min-width: 0; min-height: 0; }
 .is-face-wrap.concept-face { position: absolute; right: -34px; bottom: -52px; width: clamp(88px, 10vw, 140px); }
@@ -118,7 +160,7 @@
 .concept-face .bubble::after { right: 14px; bottom: -9px; }
 
 /* final cast: transparent layers on the page colour, kept near the PNGs' real size so they stay sharp */
-.is-cast { position: relative; width: 100%; max-width: 1000px; }
+.is-cast { position: relative; height: 100%; max-width: 100%; }
 .is-cast img { position: absolute; display: block; height: auto; }
 
 .sticker {
@@ -127,7 +169,7 @@
   height: auto;
   transform: rotate(var(--r, 0deg));
   pointer-events: none;
-  z-index: 3;
+  z-index: 11;
 }
 
 /* the drawn face + speech bubble */
@@ -139,13 +181,6 @@
   transform: rotate(10deg);
   filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff) drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff);
 }
-/* same idea as concept styles: the face hangs off the game's corner, talking outside the frame */
-.is-face-wrap.hero-face { position: absolute; right: -44px; bottom: -28px; z-index: 12; }
-/* the face covers the player's bottom-right corner, so fullscreen sits next to play */
-.post-hero .fullscreen-button { right: auto; left: 72px; }
-.hero-face .bubble { right: auto; left: 100%; bottom: 14%; margin: 0 0 0 10px; transform-origin: 0 100%; }
-.hero-face .bubble::after { right: auto; left: -9px; bottom: 16px; transform: rotate(135deg); }
-
 .bubble {
   position: absolute;
   right: 0;
@@ -186,7 +221,7 @@ div.is-face img { display: block; width: 100%; height: auto; }
 div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
 
 /* call to action */
-.is-cta { padding-bottom: 24px; }
+.is-cta { padding-bottom: 24px; margin-bottom: clamp(72px, 10vw, 150px); }
 .cta-face { position: absolute; right: 40px; bottom: 24px; }
 .cta-face .bubble { right: 100%; bottom: 36%; margin: 0 12px 0 0; }
 
@@ -285,21 +320,23 @@ div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
 }
 
 @media (max-width: 768px) {
+  .is-fullhero { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 18px 20px 0; }
+  .main-video-casestudy.post-player.post-hero { width: 100%; }
   .is-hero,
   .is-step,
   .is-step.reverse { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 20px; }
   .is-step.reverse .is-text { order: 0; }
   .is-cta { padding-left: 20px; padding-right: 20px; }
-  .is-face-wrap.hero-face { right: -6px; bottom: -24px; }
-  .hero-face .bubble { left: auto; right: 0; bottom: 100%; margin: 0 0 8px; transform-origin: 85% 100%; }
-  .hero-face .bubble::after { left: auto; right: 26px; bottom: -10px; transform: rotate(45deg); }
-  .is-logo { width: min(280px, 70%); margin: 0 auto 20px; }
+  .is-logo { width: min(280px, 70%); }
+  .is-face-wrap.hero-face { justify-self: end; margin-top: 56px; }
   .is-face-wrap.concept-face { right: -6px; bottom: -40px; }
-  .is-media.is-square { max-width: none; }
   /* the three small loops are too narrow for both buttons */
+  .is-step .is-media.is-contain { width: 100%; }
   .is-tiles { gap: 8px; }
   .is-tiles .fullscreen-button { display: none; }
-  .is-tiles .custom-button { left: 8px; bottom: 6px; width: 28px; height: 28px; }
+  .is-tiles .custom-button { left: 6px; bottom: 6px; width: 28px; height: 28px; }
+  .is-tiles .custom-button svg { width: 24px; height: 24px; }
+  .is-tiles .progress-container { left: 40px; right: 8px; bottom: 13px; height: 14px; }
   /* on a phone the heading fills the width: stickers go to the media corner instead of over the text */
   .sticker { left: auto !important; top: auto !important; right: 8px !important; bottom: 26px !important; width: 60px; }
   .is-media-wrap ~ .sticker { display: none; }
