@@ -139,7 +139,7 @@
 
 .is-hero { display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: end; padding-top: 48px; }
 .is-hero-text { min-width: 0; }
-.is-logo { display: block; width: min(560px, 82%); height: auto; margin: 0 auto; }
+.is-logo { display: block; width: min(340px, 50%); height: auto; margin: 0 auto; }
 .is-hero .is-lede { max-width: none; }
 
 .is-step { display: grid; grid-template-columns: 1fr minmax(0, 52%); gap: 60px; align-items: center; }
@@ -388,7 +388,7 @@ div.is-face .eyes { position: absolute; top: 0; left: 0; opacity: 0; }
   .is-step.reverse { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 28px 20px; }
   .is-step.reverse .is-text { order: 0; }
   .is-cta { padding-left: 20px; padding-right: 20px; }
-  .is-logo { width: min(280px, 70%); }
+  .is-logo { width: min(180px, 45%); }
   .is-face-wrap.hero-face { justify-self: end; margin-top: 56px; }
   .is-face-wrap.concept-face { right: -6px; bottom: -40px; }
   /* the three small loops are too narrow for both buttons */
